@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color" content="#111111">
+
+<title>DΛMZΞΞ NEWS — Admin Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- =========================================
+     ADMIN SIDEBAR
+========================================= -->
+
+<aside class="admin-sidebar" id="adminSidebar">
+
+
+<div class="admin-brand">
+
+    <div class="brand-mark">
+        D
+    </div>
+
+    <div class="brand-text">
+
+        <h1>
+            DΛMZΞΞ
+        </h1>
+
+        <span>
+            NEWS ADMIN
+        </span>
+
+    </div>
+
+</div>
+
+
+<nav class="admin-nav">
+
+    <a href="index.html" class="active">
+        <span class="nav-icon">▦</span>
+        <span>Dashboard</span>
+    </a>
+
+    <a href="#new-article">
+        <span class="nav-icon">＋</span>
+        <span>New Article</span>
+    </a>
+
+    <a href="#articles">
+        <span class="nav-icon">▤</span>
+        <span>Articles</span>
+    </a>
+
+    <a href="#analytics">
+        <span class="nav-icon">◫</span>
+        <span>Analytics</span>
+    </a>
+
+    <a href="#activity">
+        <span class="nav-icon">◷</span>
+        <span>Activity</span>
+    </a>
+
+</nav>
+
+
+<div class="sidebar-footer">
+
+    <div class="system-status">
+
+        <span class="status-dot"></span>
+
+        <div>
+
+            <strong id="systemStatus">
+                Online
+            </strong>
+
+            <small id="lastActive">
+                Last active: --
+            </small>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</aside>
+
+<!-- =========================================
+     MAIN ADMIN AREA
+========================================= -->
+
+<main class="admin-main">
+
+<!-- =========================================
+     TOP BAR
+========================================= -->
+
+<header class="admin-topbar">
+
+
+<button
+    type="button"
+    class="mobile-menu"
+    id="mobileMenu"
+    aria-label="Open admin menu"
+>
+    ☰
+</button>
+
+
+<div class="topbar-title">
+
+    <span>
+        ADMINISTRATION
+    </span>
+
+    <h2>
+        Dashboard
+    </h2>
+
+</div>
+
+
+<div class="topbar-actions">
+
+
+    <!-- NOTIFICATIONS -->
+
+    <div class="notification-wrapper">
+
+        <button
+            type="button"
+            class="notification-button"
+            id="notificationButton"
+            aria-label="Notifications"
+        >
+
+            🔔
+
+            <span
+                class="notification-badge hidden"
+                id="notificationBadge"
+            >
+                0
+            </span>
+
+        </button>
+
+
+        <div
+            class="notification-panel"
+            id="notificationPanel"
+        >
+
+            <div class="notification-header">
+
+                <div>
+
+                    <strong>
+                        Notifications
+                    </strong>
+
+                    <span id="notificationCount">
+                        No new notifications
+                    </span>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    id="markNotificationsRead"
+                >
+                    Mark all read
+                </button>
+
+            </div>
+
+
+            <div
+                class="notification-list"
+                id="notificationList"
+            >
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADMIN USER -->
+
+    <div class="admin-user">
+
+        <div class="admin-avatar">
+            D
+        </div>
+
+        <div class="admin-user-info">
+
+            <strong>
+                Administrator
+            </strong>
+
+            <small>
+                DΛMZΞΞ NEWS
+            </small>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+</header>
+
+<!-- =========================================
+     DASHBOARD CONTENT
+========================================= -->
+
+<div class="dashboard-content">
+
+
+<!-- =========================================
+     DASHBOARD INTRO
+========================================= -->
+
+<section class="dashboard-intro">
+
+    <div class="dashboard-welcome">
+
+        <span class="eyebrow">
+            DΛMZΞΞ NEWS
+        </span>
+
+        <h1>
+            Welcome back, Admin.
+        </h1>
+
+        <p>
+            Manage your newsroom, publish stories
+            and monitor article performance.
+        </p>
+
+    </div>
+
+
+    <a
+        href="#new-article"
+        class="primary-button"
+    >
+        <span>＋</span>
+        Create Article
+    </a>
+
+</section>
+
+
+<!-- =========================================
+     STATISTICS
+========================================= -->
+
+<section
+    class="stats-grid"
+    aria-label="Newsroom statistics"
+>
+
+
+    <!-- TOTAL ARTICLES -->
+
+    <div class="stat-card">
+
+        <div class="stat-card-top">
+
+            <span>
+                TOTAL ARTICLES
+            </span>
+
+            <div class="stat-icon">
+                ▤
+            </div>
+
+        </div>
+
+        <strong id="totalArticles">
+            0
+        </strong>
+
+        <small>
+            All articles in newsroom
+        </small>
+
+    </div>
+
+
+    <!-- PUBLISHED -->
+
+    <div class="stat-card">
+
+        <div class="stat-card-top">
+
+            <span>
+                PUBLISHED
+            </span>
+
+            <div class="stat-icon">
+                ✓
+            </div>
+
+        </div>
+
+        <strong id="publishedArticles">
+            0
+        </strong>
+
+        <small>
+            Live articles
+        </small>
+
+    </div>
+
+
+    <!-- VIEWS -->
+
+    <div class="stat-card">
+
+        <div class="stat-card-top">
+
+            <span>
+                TOTAL VIEWS
+            </span>
+
+            <div class="stat-icon">
+                ◉
+            </div>
+
+        </div>
+
+        <strong id="totalViews">
+            0
+        </strong>
+
+        <small>
+            Combined article views
+        </small>
+
+    </div>
+
+
+    <!-- SYSTEM -->
+
+    <div class="stat-card">
+
+        <div class="stat-card-top">
+
+            <span>
+                SYSTEM STATUS
+            </span>
+
+            <div class="stat-icon">
+                ●
+            </div>
+
+        </div>
+
+        <strong id="systemStatusCard">
+            Online
+        </strong>
+
+        <small id="lastActiveCard">
+            Last active: --
+        </small>
+
+    </div>
+
+
+</section>
+
+
+<!-- =========================================
+     CREATE ARTICLE
+========================================= -->
+
+<section
+    class="admin-panel"
+    id="new-article"
+>
+
+    <div class="panel-header">
+
+        <div>
+
+            <span class="eyebrow">
+                CONTENT MANAGEMENT
+            </span>
+
+            <h2>
+                Create New Article
+            </h2>
+
+            <p>
+                Write and publish a new story to DΛMZΞΞ NEWS.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <form id="articleForm">
+
+
+        <div class="form-grid">
+
+
+            <!-- TITLE -->
+
+            <div class="form-group full-width">
+
+                <label for="articleTitle">
+                    Article Title
+                </label>
+
+                <input
+                    type="text"
+                    id="articleTitle"
+                    name="title"
+                    placeholder="Enter article headline..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <!-- CATEGORY -->
+
+            <div class="form-group">
+
+                <label for="articleCategory">
+                    Category
+                </label>
+
+                <select
+                    id="articleCategory"
+                    name="category"
+                >
+
+                    <option value="">
+                        Select category
+                    </option>
+
+                    <option value="Nigeria">
+                        Nigeria
+                    </option>
+
+                    <option value="Politics">
+                        Politics
+                    </option>
+
+                    <option value="World">
+                        World
+                    </option>
+
+                    <option value="Business">
+                        Business
+                    </option>
+
+                    <option value="Sports">
+                        Sports
+                    </option>
+
+                    <option value="Entertainment">
+                        Entertainment
+                    </option>
+
+                    <option value="Technology">
+                        Technology
+                    </option>
+
+                    <option value="Science">
+                        Science
+                    </option>
+
+                    <option value="Health">
+                        Health
+                    </option>
+
+                    <option value="Lifestyle">
+                        Lifestyle
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- AUTHOR -->
+
+            <div class="form-group">
+
+                <label for="articleAuthor">
+                    Author
+                </label>
+
+                <input
+                    type="text"
+                    id="articleAuthor"
+                    name="author"
+                    value="DΛMZΞΞ NEWS"
+                    placeholder="Author name..."
+                >
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div class="form-group">
+
+                <label for="articleStatus">
+                    Article Status
+                </label>
+
+                <select
+                    id="articleStatus"
+                    name="status"
+                >
+
+                    <option value="published">
+                        Published
+                    </option>
+
+                    <option value="draft">
+                        Draft
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- BREAKING -->
+
+            <div class="form-group">
+
+                <label for="articleBreaking">
+                    Breaking News
+                </label>
+
+                <select
+                    id="articleBreaking"
+                    name="breaking"
+                >
+
+                    <option value="no">
+                        No
+                    </option>
+
+                    <option value="yes">
+                        Yes
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- IMAGE -->
+
+            <div class="form-group full-width">
+
+                <label for="articleImage">
+                    Article Image URL
+                </label>
+
+                <input
+                    type="url"
+                    id="articleImage"
+                    name="image"
+                    placeholder="https://example.com/image.jpg"
+                >
+
+                <small class="form-help">
+                    Paste the direct URL of the article image.
+                </small>
+
+            </div>
+
+
+            <!-- SUMMARY -->
+
+            <div class="form-group full-width">
+
+                <label for="articleSummary">
+                    Article Summary
+                </label>
+
+                <textarea
+                    id="articleSummary"
+                    name="summary"
+                    rows="4"
+                    placeholder="Write a short summary of the article..."
+                ></textarea>
+
+            </div>
+
+
+            <!-- CONTENT -->
+
+            <div class="form-group full-width">
+
+                <label for="articleContent">
+                    Article Content
+                </label>
+
+                <textarea
+                    id="articleContent"
+                    name="content"
+                    rows="14"
+                    placeholder="Write the full article here..."
+                ></textarea>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- FORM ACTIONS -->
+
+        <div class="form-actions">
+
+            <button
+                type="button"
+                class="secondary-button"
+                id="clearForm"
+            >
+                Clear
+            </button>
+
+
+            <button
+                type="submit"
+                class="primary-button"
+            >
+                Save Article
+            </button>
+
+        </div>
+
+    </form>
+
+</section>
+
+
+<!-- =========================================
+     ARTICLE MANAGEMENT
+========================================= -->
+
+<section
+    class="admin-panel"
+    id="articles"
+>
+
+    <div class="panel-header">
+
+        <div>
+
+            <span class="eyebrow">
+                NEWSROOM
+            </span>
+
+            <h2>
+                Articles
+            </h2>
+
+            <p>
+                Search, edit, publish or delete your articles.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ARTICLE CONTROLS -->
+
+    <div class="article-controls">
+
+
+        <div class="search-box">
+
+            <span>
+                ⌕
+            </span>
+
+            <input
+                type="search"
+                id="articleSearch"
+                placeholder="Search articles..."
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <select id="articleFilter">
+
+            <option value="all">
+                All Categories
+            </option>
+
+            <option value="Nigeria">
+                Nigeria
+            </option>
+
+            <option value="Politics">
+                Politics
+            </option>
+
+            <option value="World">
+                World
+            </option>
+
+            <option value="Business">
+                Business
+            </option>
+
+            <option value="Sports">
+                Sports
+            </option>
+
+            <option value="Entertainment">
+                Entertainment
+            </option>
+
+            <option value="Technology">
+                Technology
+            </option>
+
+            <option value="Science">
+                Science
+            </option>
+
+            <option value="Health">
+                Health
+            </option>
+
+            <option value="Lifestyle">
+                Lifestyle
+            </option>
+
+        </select>
+
+
+        <select id="articleStatusFilter">
+
+            <option value="all">
+                All Status
+            </option>
+
+            <option value="published">
+                Published
+            </option>
+
+            <option value="draft">
+                Draft
+            </option>
+
+        </select>
+
+
+    </div>
+
+
+    <!-- ARTICLES INSERTED BY JAVASCRIPT -->
+
+    <div
+        class="articles-list"
+        id="articlesList"
+    >
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     ANALYTICS
+========================================= -->
+
+<section
+    class="analytics-section"
+    id="analytics"
+>
+
+
+    <!-- ARTICLE VIEWS -->
+
+    <div class="admin-panel analytics-panel">
+
+        <div class="panel-header">
+
+            <div>
+
+                <span class="eyebrow">
+                    PERFORMANCE
+                </span>
+
+                <h2>
+                    Article Views
+                </h2>
+
+                <p>
+                    Views across your published and archived stories.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="views-chart"
+            id="viewsChart"
+        >
+        </div>
+
+    </div>
+
+
+    <!-- CATEGORY PERFORMANCE -->
+
+    <div class="admin-panel analytics-panel">
+
+        <div class="panel-header">
+
+            <div>
+
+                <span class="eyebrow">
+                    CONTENT
+                </span>
+
+                <h2>
+                    Category Performance
+                </h2>
+
+                <p>
+                    Number of articles by category.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div
+            class="category-chart"
+            id="categoryChart"
+        >
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<!-- =========================================
+     RECENT ACTIVITY
+========================================= -->
+
+<section
+    class="admin-panel"
+    id="activity"
+>
+
+    <div class="panel-header">
+
+        <div>
+
+            <span class="eyebrow">
+                ACTIVITY
+            </span>
+
+            <h2>
+                Recent Activity
+            </h2>
+
+            <p>
+                The latest actions performed in your newsroom.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="activity-list"
+        id="activityList"
+    >
+    </div>
+
+</section>
+
+
+</div>
+
+<!-- =========================================
+     ADMIN FOOTER
+========================================= -->
+
+<footer class="admin-footer">
+
+
+<strong>
+    DΛMZΞΞ NEWS
+</strong>
+
+<span>
+    Admin Dashboard
+</span>
+
+<span>
+    © 2026 DΛMZΞΞ NEWS
+</span>
+
+
+</footer>
+
+</main>
+
+<!-- =========================================
+     JAVASCRIPT
+========================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="../supabase.js"></script>
+
+<!-- =========================================
+     ADMIN LOGIN PROTECTION
+========================================= -->
+
+<script>
+(async function protectAdmin() {
+
+    try {
+
+        const { data, error } =
+            await supabaseClient.auth.getSession();
+
+        if (error || !data.session) {
+
+            window.location.replace("login.html");
+
+            return;
+        }
+
+    } catch (error) {
+
+        console.error("Admin authentication check failed:", error);
+
+        window.location.replace("login.html");
+
+    }
+
+})();
+</script>
+
+<!-- =========================================
+     ADMIN DASHBOARD SCRIPT
+========================================= -->
+
+<script src="script.js"></script>
+
+</body>
+
+</html>

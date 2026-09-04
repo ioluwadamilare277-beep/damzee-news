@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DΛMZΞΞ NEWS — Admin Login</title>
+
+    <!-- SUPABASE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../supabase.js"></script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #07111f, #075fc7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 430px;
+        }
+
+        .login-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .brand {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .brand h1 {
+            font-size: 30px;
+            font-weight: 900;
+            color: #075fc7;
+            letter-spacing: 1px;
+        }
+
+        .brand p {
+            margin-top: 8px;
+            color: #788396;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #172033;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 15px;
+            border: 1px solid #d9dee7;
+            border-radius: 9px;
+            outline: none;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: #075fc7;
+            box-shadow: 0 0 0 3px rgba(7, 95, 199, 0.1);
+        }
+
+        .login-button {
+            width: 100%;
+            border: none;
+            border-radius: 9px;
+            padding: 15px;
+            background: #075fc7;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .login-button:hover {
+            background: #064fa7;
+        }
+
+        .login-button:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            display: none;
+            margin-bottom: 18px;
+            padding: 12px 14px;
+            border-radius: 8px;
+            background: #fde8e8;
+            color: #b42318;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .footer-text {
+            text-align: center;
+            margin-top: 22px;
+            font-size: 12px;
+            color: #9aa3b2;
+        }
+
+        @media (max-width: 500px) {
+
+            .login-card {
+                padding: 30px 22px;
+            }
+
+            .brand h1 {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <main class="login-container">
+
+        <section class="login-card">
+
+            <div class="brand">
+
+                <h1>
+                    DΛMZΞΞ NEWS
+                </h1>
+
+                <p>
+                    Administrator Login
+                </p>
+
+            </div>
+
+
+            <div
+                id="errorMessage"
+                class="error-message"
+            ></div>
+
+
+            <form id="loginForm">
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Admin Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter admin email"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    id="loginButton"
+                    class="login-button"
+                >
+                    Login to Admin
+                </button>
+
+
+            </form>
+
+
+            <div class="footer-text">
+                DΛMZΞΞ NEWS Administration
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            async () => {
+
+                const loginForm =
+                    document.getElementById("loginForm");
+
+                const emailInput =
+                    document.getElementById("email");
+
+                const passwordInput =
+                    document.getElementById("password");
+
+                const loginButton =
+                    document.getElementById("loginButton");
+
+                const errorMessage =
+                    document.getElementById("errorMessage");
+
+
+                function showError(message) {
+
+                    errorMessage.textContent = message;
+
+                    errorMessage.classList.add("show");
+
+                }
+
+
+                function hideError() {
+
+                    errorMessage.textContent = "";
+
+                    errorMessage.classList.remove("show");
+
+                }
+
+
+                /*
+                 * CHECK SUPABASE CONNECTION
+                 */
+
+                if (
+                    !window.supabase ||
+                    typeof supabaseClient === "undefined"
+                ) {
+
+                    showError(
+                        "Supabase is not connected. Please check supabase.js."
+                    );
+
+                    return;
+
+                }
+
+
+                /*
+                 * CHECK EXISTING LOGIN SESSION
+                 */
+
+                try {
+
+                    const {
+                        data,
+                        error
+                    } =
+                        await supabaseClient.auth.getSession();
+
+
+                    if (error) {
+
+                        console.error(
+                            "DΛMZΞΞ NEWS: Session check failed.",
+                            error
+                        );
+
+                    }
+
+
+                    if (
+                        data &&
+                        data.session
+                    ) {
+
+                        window.location.replace(
+                            "index.html"
+                        );
+
+                        return;
+
+                    }
+
+                }
+
+                catch (error) {
+
+                    console.error(
+                        "DΛMZΞΞ NEWS: Session check error.",
+                        error
+                    );
+
+                }
+
+
+                /*
+                 * LOGIN
+                 */
+
+                loginForm.addEventListener(
+                    "submit",
+                    async event => {
+
+                        event.preventDefault();
+
+                        hideError();
+
+
+                        const email =
+                            emailInput.value.trim();
+
+                        const password =
+                            passwordInput.value;
+
+
+                        if (
+                            !email ||
+                            !password
+                        ) {
+
+                            showError(
+                                "Please enter your email and password."
+                            );
+
+                            return;
+
+                        }
+
+
+                        loginButton.disabled = true;
+
+                        loginButton.textContent =
+                            "Logging in...";
+
+
+                        try {
+
+                            const {
+                                data,
+                                error
+                            } =
+                                await supabaseClient.auth
+                                    .signInWithPassword({
+                                        email: email,
+                                        password: password
+                                    });
+
+
+                            if (error) {
+
+                                console.error(
+                                    "DΛMZΞΞ NEWS: Login failed.",
+                                    error
+                                );
+
+                                showError(
+                                    "Invalid email or password."
+                                );
+
+                                loginButton.disabled = false;
+
+                                loginButton.textContent =
+                                    "Login to Admin";
+
+                                return;
+
+                            }
+
+
+                            if (
+                                data &&
+                                data.session
+                            ) {
+
+                                loginButton.textContent =
+                                    "Login successful...";
+
+
+                                window.location.replace(
+                                    "index.html"
+                                );
+
+                                return;
+
+                            }
+
+
+                            showError(
+                                "Login failed. Please try again."
+                            );
+
+                        }
+
+                        catch (error) {
+
+                            console.error(
+                                "DΛMZΞΞ NEWS: Login error.",
+                                error
+                            );
+
+                            showError(
+                                "Something went wrong. Please try again."
+                            );
+
+                        }
+
+
+                        loginButton.disabled = false;
+
+                        loginButton.textContent =
+                            "Login to Admin";
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

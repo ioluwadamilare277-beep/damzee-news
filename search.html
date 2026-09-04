@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="description"
+      content="Search DΛMZΞΞ NEWS for the latest news, stories and updates.">
+
+<title>Search — DΛMZΞΞ NEWS</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+    /* =========================================
+       SEARCH PAGE
+    ========================================= */
+
+    .search-page {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 40px 20px 80px;
+    }
+
+    .search-page-header {
+        margin-bottom: 30px;
+    }
+
+    .search-page-header h1 {
+        font-size: 36px;
+        margin-bottom: 10px;
+        color: #07152f;
+    }
+
+    .search-page-header p {
+        color: #666;
+        font-size: 16px;
+    }
+
+    .page-search-form {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 35px;
+    }
+
+    .page-search-form input {
+        flex: 1;
+        padding: 15px 18px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 16px;
+        outline: none;
+    }
+
+    .page-search-form input:focus {
+        border-color: #07152f;
+    }
+
+    .page-search-form button {
+        padding: 15px 25px;
+        border: none;
+        border-radius: 6px;
+        background: #07152f;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .page-search-form button:hover {
+        opacity: 0.9;
+    }
+
+    #searchTitle {
+        margin-bottom: 25px;
+        font-size: 24px;
+        color: #07152f;
+    }
+
+    .no-results {
+        display: none;
+        text-align: center;
+        padding: 60px 20px;
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #eee;
+    }
+
+    .no-results h2 {
+        margin-bottom: 10px;
+        color: #07152f;
+    }
+
+    .no-results p {
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .no-results .read-more {
+        display: inline-block;
+    }
+
+    /* =========================================
+       MOBILE
+    ========================================= */
+
+    @media (max-width: 700px) {
+
+        .search-page {
+            padding: 30px 15px 60px;
+        }
+
+        .search-page-header h1 {
+            font-size: 28px;
+        }
+
+        .page-search-form {
+            flex-direction: column;
+        }
+
+        .page-search-form button {
+            width: 100%;
+        }
+
+    }
+
+</style>
+
+
+</head>
+
+<body>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header class="site-header">
+
+    <div class="container header-inner">
+
+        <div class="logo">
+            <a href="index.html">
+                DΛMZΞΞ <span>NEWS</span>
+            </a>
+        </div>
+
+
+        <form id="searchForm"
+              class="header-search">
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search news..."
+                autocomplete="off"
+            >
+
+            <button type="submit">
+                Search
+            </button>
+
+        </form>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================
+     NAVIGATION
+========================================= -->
+
+<nav class="main-nav">
+
+    <div class="container">
+
+        <a href="index.html">Home</a>
+
+        <a href="category.html?category=Nigeria">
+            Nigeria
+        </a>
+
+        <a href="category.html?category=Politics">
+            Politics
+        </a>
+
+        <a href="category.html?category=World">
+            World
+        </a>
+
+        <a href="category.html?category=Business">
+            Business
+        </a>
+
+        <a href="category.html?category=Sports">
+            Sports
+        </a>
+
+        <a href="category.html?category=Entertainment">
+            Entertainment
+        </a>
+
+        <a href="category.html?category=Technology">
+            Technology
+        </a>
+
+        <a href="category.html?category=Science">
+            Science
+        </a>
+
+        <a href="category.html?category=Health">
+            Health
+        </a>
+
+        <a href="category.html?category=Lifestyle">
+            Lifestyle
+        </a>
+
+        <a href="category.html?category=Trending">
+            Trending
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================
+     BREAKING NEWS
+========================================= -->
+
+<section class="breaking-bar">
+
+    <div class="container">
+
+        <strong>BREAKING</strong>
+
+        <div id="breakingNews">
+            Loading latest news...
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     SEARCH PAGE
+========================================= -->
+
+<main class="search-page">
+
+    <div class="search-page-header">
+
+        <h1>Search DΛMZΞΞ NEWS</h1>
+
+        <p>
+            Find the latest news stories, reports and updates.
+        </p>
+
+    </div>
+
+
+    <!-- PAGE SEARCH -->
+
+    <form id="pageSearchForm"
+          class="page-search-form">
+
+        <input
+            type="search"
+            id="pageSearchInput"
+            placeholder="What are you looking for?"
+            autocomplete="off"
+        >
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+
+
+    <!-- SEARCH TITLE -->
+
+    <h2 id="searchTitle">
+        Search Results
+    </h2>
+
+
+    <!-- RESULTS -->
+
+    <div id="searchResultsGrid"
+         class="card-grid">
+    </div>
+
+
+    <!-- EMPTY STATE -->
+
+    <div id="searchEmpty"
+         class="no-results">
+
+        <h2>No stories found</h2>
+
+        <p>
+            Enter a keyword above to search DΛMZΞΞ NEWS.
+        </p>
+
+    </div>
+
+</main>
+
+
+<!-- =========================================
+     NEWSLETTER
+========================================= -->
+
+<section class="newsletter-section">
+
+    <div class="container">
+
+        <div class="newsletter-content">
+
+            <h2>
+                Stay Updated
+            </h2>
+
+            <p>
+                Get the latest DΛMZΞΞ NEWS delivered to your inbox.
+            </p>
+
+
+            <form id="searchNewsletterForm">
+
+                <input
+                    type="email"
+                    id="searchNewsletterEmail"
+                    placeholder="Enter your email address"
+                    required
+                >
+
+                <button type="submit">
+                    Subscribe
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================
+     FOOTER
+========================================= -->
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <div class="footer-brand">
+
+                <h2>
+                    DΛMZΞΞ NEWS
+                </h2>
+
+                <p>
+                    Independent news, trusted stories.
+                </p>
+
+            </div>
+
+
+            <div class="footer-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="category.html?category=Nigeria">
+                    Nigeria
+                </a>
+
+                <a href="category.html?category=Politics">
+                    Politics
+                </a>
+
+                <a href="category.html?category=Business">
+                    Business
+                </a>
+
+                <a href="category.html?category=Sports">
+                    Sports
+                </a>
+
+                <a href="category.html?category=Entertainment">
+                    Entertainment
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © <span id="copyrightYear"></span>
+                DΛMZΞΞ NEWS. All rights reserved.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================================
+     SCRIPTS
+========================================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase.js"></script>
+
+<script src="search.js"></script>
+
+
+<!-- =========================================
+     NEWSLETTER / FOOTER / BACK TO TOP
+========================================= -->
+
+<script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const newsletterForm =
+            document.getElementById("searchNewsletterForm");
+
+        const newsletterEmail =
+            document.getElementById("searchNewsletterEmail");
+
+        const copyrightYear =
+            document.getElementById("copyrightYear");
+
+
+        /* NEWSLETTER */
+
+        if (newsletterForm) {
+
+            newsletterForm.addEventListener(
+                "submit",
+                function (event) {
+
+                    event.preventDefault();
+
+                    const email =
+                        newsletterEmail.value.trim();
+
+                    if (!email) {
+                        return;
+                    }
+
+                    alert(
+                        "Thank you for subscribing to DΛMZΞΞ NEWS!"
+                    );
+
+                    newsletterForm.reset();
+
+                }
+            );
+
+        }
+
+
+        /* COPYRIGHT YEAR */
+
+        if (copyrightYear) {
+
+            copyrightYear.textContent =
+                new Date().getFullYear();
+
+        }
+
+
+        /* BACK TO TOP */
+
+        const backToTop =
+            document.createElement("button");
+
+        backToTop.innerHTML = "↑";
+
+        backToTop.className = "back-to-top";
+
+        backToTop.setAttribute(
+            "aria-label",
+            "Back to top"
+        );
+
+        backToTop.style.display = "none";
+
+        document.body.appendChild(backToTop);
+
+
+        window.addEventListener(
+            "scroll",
+            function () {
+
+                if (window.scrollY > 400) {
+
+                    backToTop.style.display =
+                        "block";
+
+                } else {
+
+                    backToTop.style.display =
+                        "none";
+
+                }
+
+            }
+        );
+
+
+        backToTop.addEventListener(
+            "click",
+            function () {
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+        );
+
+    });
+
+</script>
+
+
+</body>
+
+</html>
