@@ -1,450 +1,660 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>DΛMZΞΞ NEWS</title>
+    <meta name="description" content="DΛMZΞΞ NEWS article">
+    <meta name="theme-color" content="#111827">
 
-<title>DΛMZΞΞ NEWS</title>
-<meta name="description" content="DΛMZΞΞ NEWS article">
-<meta name="theme-color" content="#111827">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+        html {
+            scroll-behavior: smooth;
+        }
 
-    html {
-        scroll-behavior: smooth;
-    }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f3f5f8;
+            color: #172033;
+            line-height: 1.7;
+        }
 
-    body {
-        font-family: Arial, Helvetica, sans-serif;
-        background: #f3f5f8;
-        color: #172033;
-        line-height: 1.7;
-    }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
-    a {
-        text-decoration: none;
-        color: inherit;
-    }
+        img {
+            max-width: 100%;
+            display: block;
+        }
 
-    img {
-        max-width: 100%;
-        display: block;
-    }
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: auto;
+        }
 
-    .container {
-        width: 92%;
-        max-width: 1200px;
-        margin: auto;
-    }
+        /* =========================
+           HEADER
+        ========================= */
 
-    header {
-        background: #111827;
-        color: white;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        box-shadow: 0 3px 12px rgba(0,0,0,.15);
-    }
-
-    .header-inner {
-        min-height: 72px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 25px;
-    }
-
-    .logo {
-        font-size: 25px;
-        font-weight: 900;
-        letter-spacing: 1px;
-        white-space: nowrap;
-    }
-
-    .logo span {
-        color: #ef4444;
-    }
-
-    nav {
-        display: flex;
-        align-items: center;
-        gap: 22px;
-    }
-
-    nav a {
-        font-size: 14px;
-        font-weight: 700;
-        color: #dbe3ef;
-        transition: .2s;
-    }
-
-    nav a:hover {
-        color: #ef4444;
-    }
-
-    .search-box {
-        display: flex;
-        align-items: center;
-        background: white;
-        border-radius: 5px;
-        overflow: hidden;
-    }
-
-    .search-box input {
-        border: 0;
-        outline: 0;
-        padding: 10px 12px;
-        width: 170px;
-        font-size: 13px;
-    }
-
-    .search-box button {
-        border: 0;
-        background: #ef4444;
-        color: white;
-        padding: 10px 13px;
-        cursor: pointer;
-        font-weight: bold;
-    }
-
-    .breaking {
-        background: #ef4444;
-        color: white;
-        overflow: hidden;
-    }
-
-    .breaking-inner {
-        min-height: 40px;
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .breaking-label {
-        background: #991b1b;
-        padding: 5px 10px;
-        font-size: 12px;
-        font-weight: 900;
-        white-space: nowrap;
-    }
-
-    .breaking-content {
-        font-size: 13px;
-        font-weight: 600;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .article-page {
-        padding: 45px 0 70px;
-    }
-
-    .article-wrapper {
-        background: white;
-        max-width: 900px;
-        margin: auto;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 20px rgba(0,0,0,.07);
-    }
-
-    .article-header {
-        padding: 35px 40px 25px;
-    }
-
-    .article-category {
-        display: inline-block;
-        background: #ef4444;
-        color: white;
-        padding: 5px 11px;
-        border-radius: 4px;
-        font-size: 11px;
-        font-weight: 800;
-        text-transform: uppercase;
-        margin-bottom: 15px;
-    }
-
-    .article-title {
-        font-size: 42px;
-        line-height: 1.15;
-        color: #111827;
-        margin-bottom: 18px;
-        font-weight: 900;
-    }
-
-    .article-meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 18px;
-        color: #6b7280;
-        font-size: 13px;
-    }
-
-    .article-image {
-        width: 100%;
-        max-height: 520px;
-        object-fit: cover;
-    }
-
-    .no-image {
-        width: 100%;
-        height: 360px;
-        background: #e5e7eb;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #6b7280;
-        font-size: 20px;
-        font-weight: 800;
-        letter-spacing: 1px;
-    }
-
-    .article-content {
-        padding: 35px 40px 45px;
-        font-size: 18px;
-        color: #374151;
-    }
-
-    .article-content p {
-        margin-bottom: 22px;
-    }
-
-    .article-content p:first-child {
-        font-size: 19px;
-        color: #1f2937;
-    }
-
-    .share-section {
-        padding: 0 40px 35px;
-        border-top: 1px solid #e5e7eb;
-        padding-top: 25px;
-    }
-
-    .share-section h3 {
-        font-size: 15px;
-        margin-bottom: 12px;
-        color: #111827;
-    }
-
-    .share-buttons {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-    }
-
-    .share-btn {
-        border: 0;
-        padding: 9px 14px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: 700;
-        font-size: 12px;
-    }
-
-    .facebook {
-        background: #1877f2;
-        color: white;
-    }
-
-    .twitter {
-        background: #111827;
-        color: white;
-    }
-
-    .whatsapp {
-        background: #25d366;
-        color: white;
-    }
-
-    .copy-link {
-        background: #e5e7eb;
-        color: #111827;
-    }
-
-    .related {
-        padding: 0 40px 45px;
-    }
-
-    .related h2 {
-        font-size: 22px;
-        margin-bottom: 20px;
-        color: #111827;
-    }
-
-    .related-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-    }
-
-    .related-card {
-        border: 1px solid #e5e7eb;
-        border-radius: 7px;
-        overflow: hidden;
-        background: white;
-        transition: .2s;
-    }
-
-    .related-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 8px 20px rgba(0,0,0,.08);
-    }
-
-    .related-card img {
-        width: 100%;
-        height: 130px;
-        object-fit: cover;
-        background: #e5e7eb;
-    }
-
-    .related-no-image {
-        width: 100%;
-        height: 130px;
-        background: #e5e7eb;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #6b7280;
-        font-size: 12px;
-        font-weight: 800;
-    }
-
-    .related-info {
-        padding: 12px;
-    }
-
-    .related-category {
-        color: #ef4444;
-        font-size: 10px;
-        font-weight: 800;
-        text-transform: uppercase;
-    }
-
-    .related-info h3 {
-        font-size: 15px;
-        line-height: 1.35;
-        margin-top: 5px;
-        color: #111827;
-    }
-
-    .message-box {
-        max-width: 700px;
-        margin: 70px auto;
-        text-align: center;
-        background: white;
-        padding: 50px 25px;
-        border-radius: 10px;
-        box-shadow: 0 4px 20px rgba(0,0,0,.07);
-    }
-
-    .message-box h2 {
-        margin-bottom: 10px;
-        color: #111827;
-    }
-
-    .message-box p {
-        color: #6b7280;
-        margin-bottom: 20px;
-    }
-
-    .home-btn {
-        display: inline-block;
-        background: #ef4444;
-        color: white;
-        padding: 10px 18px;
-        border-radius: 5px;
-        font-weight: 700;
-    }
-
-    footer {
-        background: #111827;
-        color: #9ca3af;
-        padding: 35px 0;
-        text-align: center;
-        font-size: 13px;
-    }
-
-    footer strong {
-        color: white;
-    }
-
-    @media (max-width: 800px) {
-
-        nav {
-            display: none;
+        header {
+            background: #111827;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 12px rgba(0,0,0,.15);
         }
 
         .header-inner {
-            min-height: 65px;
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            white-space: nowrap;
+        }
+
+        .logo span {
+            color: #ef4444;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            overflow-x: auto;
+            white-space: nowrap;
+            scrollbar-width: thin;
+        }
+
+        nav a {
+            font-size: 14px;
+            font-weight: 700;
+            color: #dbe3ef;
+            transition: .2s;
+            flex-shrink: 0;
+        }
+
+        nav a:hover {
+            color: #ef4444;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            flex-shrink: 0;
         }
 
         .search-box input {
-            width: 120px;
+            border: 0;
+            outline: 0;
+            padding: 10px 12px;
+            width: 170px;
+            font-size: 13px;
+        }
+
+        .search-box button {
+            border: 0;
+            background: #ef4444;
+            color: white;
+            padding: 10px 13px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* =========================
+           BREAKING NEWS
+        ========================= */
+
+        .breaking {
+            background: #ef4444;
+            color: white;
+            overflow: hidden;
+        }
+
+        .breaking-inner {
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .breaking-label {
+            background: #991b1b;
+            padding: 5px 10px;
+            font-size: 12px;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+
+        .breaking-content {
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* =========================
+           ARTICLE
+        ========================= */
+
+        .article-page {
+            padding: 45px 0 70px;
+        }
+
+        .article-wrapper {
+            background: white;
+            max-width: 900px;
+            margin: auto;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,.07);
         }
 
         .article-header {
-            padding: 25px 20px 20px;
+            padding: 35px 40px 25px;
+        }
+
+        .article-category {
+            display: inline-block;
+            background: #ef4444;
+            color: white;
+            padding: 5px 11px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 15px;
         }
 
         .article-title {
-            font-size: 30px;
-        }
-
-        .article-content {
-            padding: 25px 20px 35px;
-            font-size: 17px;
-        }
-
-        .share-section,
-        .related {
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-
-        .related-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .related-card img,
-        .related-no-image {
-            height: 180px;
-        }
-    }
-
-    @media (max-width: 500px) {
-
-        .logo {
-            font-size: 20px;
-        }
-
-        .search-box input {
-            width: 95px;
-        }
-
-        .article-title {
-            font-size: 27px;
+            font-size: 42px;
+            line-height: 1.15;
+            color: #111827;
+            margin-bottom: 18px;
+            font-weight: 900;
         }
 
         .article-meta {
-            gap: 8px;
-            flex-direction: column;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            color: #6b7280;
+            font-size: 13px;
+        }
+
+        .article-image {
+            width: 100%;
+            max-height: 520px;
+            object-fit: cover;
         }
 
         .no-image {
-            height: 250px;
+            width: 100%;
+            height: 360px;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 1px;
         }
-    }
-</style>
 
+        .article-content {
+            padding: 35px 40px 45px;
+            font-size: 18px;
+            color: #374151;
+        }
 
+        .article-content p {
+            margin-bottom: 22px;
+        }
+
+        .article-content p:first-child {
+            font-size: 19px;
+            color: #1f2937;
+        }
+
+        /* =========================
+           SHARE
+        ========================= */
+
+        .share-section {
+            padding: 0 40px 35px;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 25px;
+        }
+
+        .share-section h3 {
+            font-size: 15px;
+            margin-bottom: 12px;
+            color: #111827;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            border: 0;
+            padding: 9px 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .facebook {
+            background: #1877f2;
+            color: white;
+        }
+
+        .twitter {
+            background: #111827;
+            color: white;
+        }
+
+        .whatsapp {
+            background: #25d366;
+            color: white;
+        }
+
+        .copy-link {
+            background: #e5e7eb;
+            color: #111827;
+        }
+
+        /* =========================
+           NEWS SECTIONS BELOW ARTICLE
+        ========================= */
+
+        .news-section {
+            max-width: 1200px;
+            width: 92%;
+            margin: 45px auto 0;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 22px;
+            border-bottom: 3px solid #111827;
+            padding-bottom: 10px;
+        }
+
+        .section-heading h2 {
+            font-size: 25px;
+            color: #111827;
+            font-weight: 900;
+        }
+
+        .section-heading span {
+            color: #ef4444;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 9px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,.07);
+            transition: .25s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,.12);
+        }
+
+        .news-card-image {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            background: #e5e7eb;
+        }
+
+        .news-card-no-image {
+            width: 100%;
+            height: 190px;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #6b7280;
+            font-size: 14px;
+            font-weight: 800;
+        }
+
+        .news-card-content {
+            padding: 18px;
+        }
+
+        .news-card-category {
+            color: #ef4444;
+            font-size: 10px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+        }
+
+        .news-card-title {
+            font-size: 19px;
+            line-height: 1.35;
+            color: #111827;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        .news-card-summary {
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .news-card-meta {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            color: #9ca3af;
+            font-size: 11px;
+            border-top: 1px solid #e5e7eb;
+            padding-top: 10px;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 12px;
+            color: #ef4444;
+            font-size: 12px;
+            font-weight: 900;
+        }
+
+        .news-loading,
+        .news-empty {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            color: #6b7280;
+            text-align: center;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #111827;
+            color: #9ca3af;
+            margin-top: 65px;
+            padding: 50px 0 20px;
+        }
+
+        .footer-container {
+            width: 92%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            padding-bottom: 35px;
+        }
+
+        .footer-brand h2 {
+            color: white;
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand h2 span {
+            color: #ef4444;
+        }
+
+        .footer-brand p {
+            max-width: 350px;
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .footer-column h3 {
+            color: white;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #9ca3af;
+            font-size: 13px;
+            margin-bottom: 9px;
+            transition: .2s;
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .footer-social {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 18px;
+        }
+
+        .footer-social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 7px 10px;
+            border: 1px solid #374151;
+            border-radius: 5px;
+            font-size: 11px;
+            color: #d1d5db;
+        }
+
+        .footer-social a:hover {
+            background: #1f2937;
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            font-size: 12px;
+        }
+
+        .footer-bottom strong {
+            color: white;
+        }
+
+        .back-top {
+            display: inline-block;
+            color: white;
+            border: 1px solid #374151;
+            padding: 7px 11px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* =========================
+           MESSAGE
+        ========================= */
+
+        .message-box {
+            max-width: 700px;
+            margin: 70px auto;
+            text-align: center;
+            background: white;
+            padding: 50px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,.07);
+        }
+
+        .message-box h2 {
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        .message-box p {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .home-btn {
+            display: inline-block;
+            background: #ef4444;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 5px;
+            font-weight: 700;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 800px) {
+
+            nav {
+                display: flex;
+                width: 100%;
+                overflow-x: auto;
+                gap: 16px;
+                padding: 5px 0;
+            }
+
+            .header-inner {
+                min-height: 65px;
+            }
+
+            .search-box input {
+                width: 120px;
+            }
+
+            .article-header {
+                padding: 25px 20px 20px;
+            }
+
+            .article-title {
+                font-size: 30px;
+            }
+
+            .article-content {
+                padding: 25px 20px 35px;
+                font-size: 17px;
+            }
+
+            .share-section {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .news-section {
+                width: 92%;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .news-card-image,
+            .news-card-no-image {
+                height: 210px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .search-box input {
+                width: 95px;
+            }
+
+            .article-title {
+                font-size: 27px;
+            }
+
+            .article-meta {
+                gap: 8px;
+                flex-direction: column;
+            }
+
+            .no-image {
+                height: 250px;
+            }
+
+            .section-heading h2 {
+                font-size: 21px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -452,67 +662,251 @@
 <header>
     <div class="container header-inner">
 
+        <a href="index.html" class="logo">
+            DΛMZΞΞ <span>NEWS</span>
+        </a>
 
-    <a href="index.html" class="logo">
-        DΛMZΞΞ <span>NEWS</span>
-    </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="category.html?category=News">News</a>
+            <a href="category.html?category=Nigeria">Nigeria</a>
+            <a href="category.html?category=World">World</a>
+            <a href="category.html?category=Politics">Politics</a>
+            <a href="category.html?category=Business">Business</a>
+            <a href="category.html?category=Sports">Sports</a>
+            <a href="category.html?category=Entertainment">Entertainment</a>
+            <a href="category.html?category=Technology">Technology</a>
+            <a href="category.html?category=Science">Science</a>
+            <a href="category.html?category=Health">Health</a>
+            <a href="category.html?category=Lifestyle">Lifestyle</a>
+        </nav>
 
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="category.html?category=News">News</a>
-        <a href="category.html?category=Politics">Politics</a>
-        <a href="category.html?category=Sports">Sports</a>
-        <a href="category.html?category=Entertainment">Entertainment</a>
-    </nav>
+        <form class="search-box" id="searchForm">
+            <input type="text" id="searchInput" placeholder="Search news...">
+            <button type="submit">⌕</button>
+        </form>
 
-    <form class="search-box" id="searchForm">
-        <input type="text" id="searchInput" placeholder="Search news...">
-        <button type="submit">⌕</button>
-    </form>
-
-</div>
-
-
+    </div>
 </header>
 
 <section class="breaking">
     <div class="container breaking-inner">
 
+        <div class="breaking-label">
+            BREAKING
+        </div>
 
-    <div class="breaking-label">
-        BREAKING
+        <div class="breaking-content" id="breakingContent">
+            Loading latest news...
+        </div>
+
     </div>
-
-    <div class="breaking-content" id="breakingContent">
-        Loading latest news...
-    </div>
-
-</div>
-
-
 </section>
 
 <main class="article-page">
 
+    <div id="articleContainer">
 
-<div id="articleContainer">
+        <div class="message-box">
+            <h2>Loading article...</h2>
+            <p>Please wait.</p>
+        </div>
 
-    <div class="message-box">
-        <h2>Loading article...</h2>
-        <p>Please wait.</p>
     </div>
-
-</div>
-
 
 </main>
 
-<footer>
-    <div class="container">
-        © <span id="year"></span>
-        <strong>DΛMZΞΞ NEWS</strong>.
-        All Rights Reserved.
+<section class="news-section">
+
+    <div class="section-heading">
+        <h2>Latest News</h2>
+        <span>DΛMZΞΞ NEWS</span>
     </div>
+
+    <div
+        class="news-grid"
+        id="latestNewsGrid"
+    >
+        <div class="news-loading">
+            Loading latest news...
+        </div>
+    </div>
+
+</section>
+
+<section class="news-section">
+
+    <div class="section-heading">
+        <h2 id="categoryNewsTitle">
+            More News
+        </h2>
+        <span>MORE STORIES</span>
+    </div>
+
+    <div
+        class="news-grid"
+        id="categoryNewsGrid"
+    >
+        <div class="news-loading">
+            Loading more stories...
+        </div>
+    </div>
+
+</section>
+
+<footer>
+
+    <div class="footer-container">
+
+        <div class="footer-main">
+
+            <div class="footer-brand">
+
+                <h2>
+                    DΛMZΞΞ <span>NEWS</span>
+                </h2>
+
+                <p>
+                    DΛMZΞΞ NEWS brings you the latest
+                    breaking news, politics, business,
+                    sports, entertainment, technology
+                    and stories from Nigeria and around
+                    the world.
+                </p>
+
+                <div class="footer-social">
+
+                    <a
+                        href="https://t.me/damzeenews"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        Telegram
+                    </a>
+
+                    <a
+                        href="https://whatsapp.com/channel/0029VbDhaGj7YSd6MFcIZP1M"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        WhatsApp
+                    </a>
+
+                    <a
+                        href="https://x.com/DAMZEENEWS"
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        X
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h3>News</h3>
+
+                <a href="index.html">
+                    Latest News
+                </a>
+
+                <a href="category.html?category=Nigeria">
+                    Nigeria
+                </a>
+
+                <a href="category.html?category=World">
+                    World
+                </a>
+
+                <a href="category.html?category=Politics">
+                    Politics
+                </a>
+
+                <a href="category.html?category=Business">
+                    Business
+                </a>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h3>Categories</h3>
+
+                <a href="category.html?category=Sports">
+                    Sports
+                </a>
+
+                <a href="category.html?category=Entertainment">
+                    Entertainment
+                </a>
+
+                <a href="category.html?category=Technology">
+                    Technology
+                </a>
+
+                <a href="category.html?category=Science">
+                    Science
+                </a>
+
+                <a href="category.html?category=Health">
+                    Health
+                </a>
+
+                <a href="category.html?category=Lifestyle">
+                    Lifestyle
+                </a>
+
+            </div>
+
+            <div class="footer-column">
+
+                <h3>Information</h3>
+
+                <a href="index.html">
+                    About DAMZEE
+                </a>
+
+                <a href="index.html">
+                    Contact
+                </a>
+
+                <a href="index.html">
+                    Advertise
+                </a>
+
+                <a href="index.html">
+                    Privacy Policy
+                </a>
+
+                <a href="index.html">
+                    Terms
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            <div>
+                © <span id="year"></span>
+                <strong>DΛMZΞΞ NEWS</strong>.
+                All Rights Reserved.
+            </div>
+
+            <div
+                class="back-top"
+                id="backTop"
+            >
+                ↑ Back to Top
+            </div>
+
+        </div>
+
+    </div>
+
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -529,6 +923,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const breakingContent =
         document.getElementById("breakingContent");
 
+    const latestNewsGrid =
+        document.getElementById("latestNewsGrid");
+
+    const categoryNewsGrid =
+        document.getElementById("categoryNewsGrid");
+
+    const categoryNewsTitle =
+        document.getElementById("categoryNewsTitle");
+
     const searchForm =
         document.getElementById("searchForm");
 
@@ -537,6 +940,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const year =
         document.getElementById("year");
+
+    const backTop =
+        document.getElementById("backTop");
 
     if (year) {
         year.textContent =
@@ -553,11 +959,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let currentArticle = null;
 
-
-    /* =========================================
-       SECURITY
-    ========================================= */
-
     function escapeHTML(value) {
 
         const div =
@@ -568,11 +969,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         return div.innerHTML;
     }
-
-
-    /* =========================================
-       LOCAL STORAGE FALLBACK
-    ========================================= */
 
     function getLocalArticles() {
 
@@ -595,7 +991,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-
     function findLocalArticle(id) {
 
         const articles =
@@ -607,11 +1002,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 String(id)
         );
     }
-
-
-    /* =========================================
-       FORMAT CONTENT
-    ========================================= */
 
     function formatContent(content) {
 
@@ -644,11 +1034,6 @@ document.addEventListener("DOMContentLoaded", () => {
             .join("");
     }
 
-
-    /* =========================================
-       RENDER ARTICLE
-    ========================================= */
-
     function renderArticle(article) {
 
         currentArticle =
@@ -671,13 +1056,10 @@ document.addEventListener("DOMContentLoaded", () => {
             article.created_at ||
             "";
 
-
         document.title =
             `${title} | DΛMZΞΞ NEWS`;
 
-
         let imageHTML = "";
-
 
         if (
             article.image &&
@@ -705,7 +1087,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             `;
         }
-
 
         articleContainer.innerHTML = `
 
@@ -796,13 +1177,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 <section class="related">
 
-                    <h2>
+                    <h2 style="
+                        font-size:22px;
+                        color:#111827;
+                        padding:25px 40px;
+                        border-top:1px solid #e5e7eb;
+                    ">
                         Related Stories
                     </h2>
 
                     <div
                         class="related-grid"
                         id="relatedGrid"
+                        style="
+                            display:grid;
+                            grid-template-columns:repeat(3,1fr);
+                            gap:18px;
+                            padding:0 40px 40px;
+                        "
                     >
                         <p>
                             Loading related stories...
@@ -814,18 +1206,16 @@ document.addEventListener("DOMContentLoaded", () => {
             </article>
         `;
 
-
         setupSharing();
 
         loadRelatedStories(article);
 
         increaseViews(article);
+
+        loadLatestNews(article);
+
+        loadCategoryNews(article);
     }
-
-
-    /* =========================================
-       LOAD ARTICLE
-    ========================================= */
 
     async function loadArticle() {
 
@@ -839,9 +1229,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-
         let supabaseArticle = null;
-
 
         if (
             typeof supabaseClient !==
@@ -868,7 +1256,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         )
                         .maybeSingle();
 
-
                 if (error) {
 
                     console.error(
@@ -891,7 +1278,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-
         if (supabaseArticle) {
 
             renderArticle(
@@ -904,7 +1290,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 findLocalArticle(
                     articleId
                 );
-
 
             if (localArticle) {
 
@@ -924,7 +1309,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-
                 renderArticle(
                     localArticle
                 );
@@ -939,13 +1323,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-
-    /* =========================================
-       SECURE VIEW COUNTER
-       VIEWS ARE STORED IN SUPABASE
-       BUT NOT DISPLAYED TO READERS
-    ========================================= */
-
     async function increaseViews(article) {
 
         if (
@@ -955,10 +1332,8 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-
         const viewKey =
             `viewedArticle_${article.id}`;
-
 
         if (
             sessionStorage.getItem(
@@ -969,12 +1344,10 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-
         sessionStorage.setItem(
             viewKey,
             "true"
         );
-
 
         if (
             typeof supabaseClient ===
@@ -984,7 +1357,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             return;
         }
-
 
         try {
 
@@ -1000,7 +1372,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
                 );
 
-
             if (error) {
 
                 console.error(
@@ -1011,7 +1382,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-
             if (
                 typeof data ===
                     "number"
@@ -1019,15 +1389,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 article.views =
                     data;
-
-                /*
-                 * The view count is intentionally
-                 * NOT displayed on the public
-                 * article page.
-                 *
-                 * It remains stored in Supabase
-                 * for the admin dashboard.
-                 */
             }
 
         } catch (error) {
@@ -1039,11 +1400,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-
-    /* =========================================
-       RELATED STORIES
-    ========================================= */
-
     async function loadRelatedStories(article) {
 
         const relatedGrid =
@@ -1051,14 +1407,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 "relatedGrid"
             );
 
-
         if (!relatedGrid) {
             return;
         }
 
-
         let related = [];
-
 
         if (
             typeof supabaseClient !==
@@ -1089,14 +1442,13 @@ document.addEventListener("DOMContentLoaded", () => {
                             article.id
                         )
                         .order(
-                            "id",
+                            "date",
                             {
                                 ascending:
                                     false
                             }
                         )
                         .limit(3);
-
 
                 if (
                     !error &&
@@ -1116,14 +1468,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-
         if (
             related.length === 0
         ) {
 
             const localArticles =
                 getLocalArticles();
-
 
             related =
                 localArticles
@@ -1138,11 +1488,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     )
                     .filter(
                         item =>
-                            !item.status ||
                             String(
-                                item.status
-                            ).toLowerCase() ===
+                                item.status ||
                                 "published"
+                            ).toLowerCase() ===
+                            "published"
                     )
                     .filter(
                         item =>
@@ -1152,7 +1502,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     )
                     .slice(0, 3);
         }
-
 
         if (
             related.length === 0
@@ -1167,13 +1516,11 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-
         relatedGrid.innerHTML =
             related
                 .map(item => {
 
                     let imageHTML = "";
-
 
                     if (
                         item.image &&
@@ -1191,7 +1538,12 @@ document.addEventListener("DOMContentLoaded", () => {
                                     item.title ||
                                     "News"
                                 )}"
-                                class="related-card-image"
+                                style="
+                                    width:100%;
+                                    height:130px;
+                                    object-fit:cover;
+                                    background:#e5e7eb;
+                                "
                                 onerror="this.style.display='none'"
                             >
                         `;
@@ -1199,12 +1551,21 @@ document.addEventListener("DOMContentLoaded", () => {
                     } else {
 
                         imageHTML = `
-                            <div class="related-no-image">
+                            <div style="
+                                width:100%;
+                                height:130px;
+                                background:#e5e7eb;
+                                display:flex;
+                                align-items:center;
+                                justify-content:center;
+                                color:#6b7280;
+                                font-size:12px;
+                                font-weight:800;
+                            ">
                                 DΛMZΞΞ NEWS
                             </div>
                         `;
                     }
-
 
                     return `
 
@@ -1212,21 +1573,39 @@ document.addEventListener("DOMContentLoaded", () => {
                             href="article.html?id=${encodeURIComponent(
                                 item.id
                             )}"
-                            class="related-card"
+                            style="
+                                border:1px solid #e5e7eb;
+                                border-radius:7px;
+                                overflow:hidden;
+                                background:white;
+                                display:block;
+                            "
                         >
 
                             ${imageHTML}
 
-                            <div class="related-info">
+                            <div style="
+                                padding:12px;
+                            ">
 
-                                <div class="related-category">
+                                <div style="
+                                    color:#ef4444;
+                                    font-size:10px;
+                                    font-weight:800;
+                                    text-transform:uppercase;
+                                ">
                                     ${escapeHTML(
                                         item.category ||
                                         "News"
                                     )}
                                 </div>
 
-                                <h3>
+                                <h3 style="
+                                    font-size:15px;
+                                    line-height:1.35;
+                                    margin-top:5px;
+                                    color:#111827;
+                                ">
                                     ${escapeHTML(
                                         item.title ||
                                         "Untitled Article"
@@ -1242,15 +1621,371 @@ document.addEventListener("DOMContentLoaded", () => {
                 .join("");
     }
 
+    function createNewsCard(article) {
 
-    /* =========================================
-       BREAKING NEWS
-    ========================================= */
+        const title =
+            escapeHTML(
+                article.title ||
+                "Untitled Article"
+            );
+
+        const category =
+            escapeHTML(
+                article.category ||
+                "News"
+            );
+
+        const summary =
+            escapeHTML(
+                article.summary ||
+                "Read the latest story from DΛMZΞΞ NEWS."
+            );
+
+        const author =
+            escapeHTML(
+                article.author ||
+                "DΛMZΞΞ NEWS"
+            );
+
+        const date =
+            escapeHTML(
+                article.date ||
+                article.created_at ||
+                ""
+            );
+
+        const image =
+            article.image &&
+            String(article.image).trim() !== ""
+                ? `
+                    <img
+                        src="${escapeHTML(
+                            article.image
+                        )}"
+                        alt="${title}"
+                        class="news-card-image"
+                        loading="lazy"
+                        onerror="this.style.display='none'"
+                    >
+                `
+                : `
+                    <div class="news-card-no-image">
+                        DΛMZΞΞ NEWS
+                    </div>
+                `;
+
+        return `
+
+            <a
+                href="article.html?id=${encodeURIComponent(
+                    article.id
+                )}"
+                class="news-card"
+            >
+
+                ${image}
+
+                <div class="news-card-content">
+
+                    <div class="news-card-category">
+                        ${category}
+                    </div>
+
+                    <h3 class="news-card-title">
+                        ${title}
+                    </h3>
+
+                    <p class="news-card-summary">
+                        ${summary}
+                    </p>
+
+                    <div class="news-card-meta">
+
+                        <span>
+                            ${author}
+                        </span>
+
+                        <span>
+                            ${date}
+                        </span>
+
+                    </div>
+
+                    <span class="read-more">
+                        Read Full Story →
+                    </span>
+
+                </div>
+
+            </a>
+        `;
+    }
+
+    async function loadLatestNews(article) {
+
+        if (!latestNewsGrid) {
+            return;
+        }
+
+        let latest = [];
+
+        if (
+            typeof supabaseClient !==
+                "undefined" &&
+            supabaseClient
+        ) {
+
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient
+                        .from("articles")
+                        .select("*")
+                        .eq(
+                            "status",
+                            "published"
+                        )
+                        .neq(
+                            "id",
+                            article.id
+                        )
+                        .order(
+                            "date",
+                            {
+                                ascending:
+                                    false
+                            }
+                        )
+                        .limit(6);
+
+                if (
+                    !error &&
+                    data
+                ) {
+
+                    latest =
+                        data;
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Latest news error:",
+                    error
+                );
+            }
+        }
+
+        if (
+            latest.length === 0
+        ) {
+
+            latest =
+                getLocalArticles()
+                    .filter(
+                        item =>
+                            String(
+                                item.id
+                            ) !==
+                            String(
+                                article.id
+                            )
+                    )
+                    .filter(
+                        item =>
+                            String(
+                                item.status ||
+                                "published"
+                            ).toLowerCase() ===
+                            "published"
+                    )
+                    .sort(
+                        (a, b) =>
+                            new Date(
+                                b.date ||
+                                b.created_at ||
+                                0
+                            ) -
+                            new Date(
+                                a.date ||
+                                a.created_at ||
+                                0
+                            )
+                    )
+                    .slice(0, 6);
+        }
+
+        if (
+            latest.length === 0
+        ) {
+
+            latestNewsGrid.innerHTML = `
+                <div class="news-empty">
+                    No latest news available.
+                </div>
+            `;
+
+            return;
+        }
+
+        latestNewsGrid.innerHTML =
+            latest
+                .map(
+                    createNewsCard
+                )
+                .join("");
+    }
+
+    async function loadCategoryNews(article) {
+
+        if (!categoryNewsGrid) {
+            return;
+        }
+
+        const category =
+            article.category ||
+            "News";
+
+        if (categoryNewsTitle) {
+
+            categoryNewsTitle.textContent =
+                `More ${category} News`;
+        }
+
+        let categoryArticles = [];
+
+        if (
+            typeof supabaseClient !==
+                "undefined" &&
+            supabaseClient
+        ) {
+
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient
+                        .from("articles")
+                        .select("*")
+                        .eq(
+                            "status",
+                            "published"
+                        )
+                        .eq(
+                            "category",
+                            category
+                        )
+                        .neq(
+                            "id",
+                            article.id
+                        )
+                        .order(
+                            "date",
+                            {
+                                ascending:
+                                    false
+                            }
+                        )
+                        .limit(6);
+
+                if (
+                    !error &&
+                    data
+                ) {
+
+                    categoryArticles =
+                        data;
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Category news error:",
+                    error
+                );
+            }
+        }
+
+        if (
+            categoryArticles.length === 0
+        ) {
+
+            categoryArticles =
+                getLocalArticles()
+                    .filter(
+                        item =>
+                            String(
+                                item.id
+                            ) !==
+                            String(
+                                article.id
+                            )
+                    )
+                    .filter(
+                        item =>
+                            String(
+                                item.status ||
+                                "published"
+                            ).toLowerCase() ===
+                            "published"
+                    )
+                    .filter(
+                        item =>
+                            String(
+                                item.category ||
+                                ""
+                            ).toLowerCase() ===
+                            String(
+                                category
+                            ).toLowerCase()
+                    )
+                    .sort(
+                        (a, b) =>
+                            new Date(
+                                b.date ||
+                                b.created_at ||
+                                0
+                            ) -
+                            new Date(
+                                a.date ||
+                                a.created_at ||
+                                0
+                            )
+                    )
+                    .slice(0, 6);
+        }
+
+        if (
+            categoryArticles.length === 0
+        ) {
+
+            categoryNewsGrid.innerHTML = `
+                <div class="news-empty">
+                    No more ${escapeHTML(
+                        category
+                    )} stories available.
+                </div>
+            `;
+
+            return;
+        }
+
+        categoryNewsGrid.innerHTML =
+            categoryArticles
+                .map(
+                    createNewsCard
+                )
+                .join("");
+    }
 
     async function loadBreakingNews() {
 
         let breaking = [];
-
 
         if (
             typeof supabaseClient !==
@@ -1276,14 +2011,13 @@ document.addEventListener("DOMContentLoaded", () => {
                             "yes"
                         )
                         .order(
-                            "id",
+                            "date",
                             {
                                 ascending:
                                     false
                             }
                         )
                         .limit(3);
-
 
                 if (
                     !error &&
@@ -1303,14 +2037,12 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-
         if (
             breaking.length === 0
         ) {
 
             const localArticles =
                 getLocalArticles();
-
 
             breaking =
                 localArticles
@@ -1335,7 +2067,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     .slice(0, 3);
         }
 
-
         if (
             breaking.length === 0
         ) {
@@ -1345,7 +2076,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             return;
         }
-
 
         breakingContent.textContent =
             breaking
@@ -1358,11 +2088,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
     }
 
-
-    /* =========================================
-       SHARE BUTTONS
-    ========================================= */
-
     function setupSharing() {
 
         const url =
@@ -1371,7 +2096,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const title =
             currentArticle?.title ||
             "DΛMZΞΞ NEWS";
-
 
         const facebook =
             document.getElementById(
@@ -1393,7 +2117,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 "copyLink"
             );
 
-
         if (facebook) {
 
             facebook.addEventListener(
@@ -1411,7 +2134,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             );
         }
-
 
         if (twitter) {
 
@@ -1433,7 +2155,6 @@ document.addEventListener("DOMContentLoaded", () => {
             );
         }
 
-
         if (whatsapp) {
 
             whatsapp.addEventListener(
@@ -1453,7 +2174,6 @@ document.addEventListener("DOMContentLoaded", () => {
             );
         }
 
-
         if (copy) {
 
             copy.addEventListener(
@@ -1468,7 +2188,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         copy.textContent =
                             "Copied!";
-
 
                         setTimeout(
                             () => {
@@ -1490,11 +2209,6 @@ document.addEventListener("DOMContentLoaded", () => {
             );
         }
     }
-
-
-    /* =========================================
-       ERROR
-    ========================================= */
 
     function showError(
         title,
@@ -1528,11 +2242,6 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
     }
 
-
-    /* =========================================
-       SEARCH
-    ========================================= */
-
     if (
         searchForm &&
         searchInput
@@ -1547,11 +2256,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 const query =
                     searchInput.value.trim();
 
-
                 if (!query) {
                     return;
                 }
-
 
                 window.location.href =
                     `search.html?q=${encodeURIComponent(
@@ -1561,10 +2268,20 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     }
 
+    if (backTop) {
 
-    /* =========================================
-       START
-    ========================================= */
+        backTop.addEventListener(
+            "click",
+            () => {
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+        );
+    }
 
     loadBreakingNews();
 
