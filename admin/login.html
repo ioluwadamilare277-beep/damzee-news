@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,6 +6,8 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#111111">
 
     <title>DΛMZΞΞ NEWS — Admin Login</title>
 
@@ -272,9 +275,9 @@
                 }
 
 
-                /*
-                 * CHECK SUPABASE CONNECTION
-                 */
+                /* =========================================
+                   SUPABASE CHECK
+                ========================================= */
 
                 if (
                     !window.supabase ||
@@ -290,9 +293,9 @@
                 }
 
 
-                /*
-                 * CHECK EXISTING LOGIN SESSION
-                 */
+                /* =========================================
+                   CHECK EXISTING SESSION
+                ========================================= */
 
                 try {
 
@@ -312,6 +315,11 @@
 
                     }
 
+
+                    /*
+                     * Only redirect if there is
+                     * a genuine active session.
+                     */
 
                     if (
                         data &&
@@ -338,9 +346,9 @@
                 }
 
 
-                /*
-                 * LOGIN
-                 */
+                /* =========================================
+                   LOGIN
+                ========================================= */
 
                 loginForm.addEventListener(
                     "submit",

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -13,9 +14,48 @@
 
 <link rel="stylesheet" href="style.css">
 
+<style>
+
+/* Prevent dashboard from flashing before authentication is checked */
+
+body.admin-loading .admin-sidebar,
+body.admin-loading .admin-main {
+    visibility: hidden;
+}
+
+body.admin-loading {
+    background: #111111;
+}
+
+/* Logout button */
+
+.logout-button {
+    border: 1px solid #d7dce5;
+    background: #ffffff;
+    color: #c62828;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.logout-button:hover {
+    background: #fff1f1;
+    border-color: #c62828;
+}
+
+.logout-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+</style>
+
 </head>
 
-<body>
+<body class="admin-loading">
 
 <!-- =========================================
      ADMIN SIDEBAR
@@ -100,11 +140,13 @@
 
 </aside>
 
+
 <!-- =========================================
      MAIN ADMIN AREA
 ========================================= -->
 
 <main class="admin-main">
+
 
 <!-- =========================================
      TOP BAR
@@ -225,10 +267,23 @@
 
     </div>
 
+
+    <!-- LOGOUT -->
+
+    <button
+        type="button"
+        id="logoutButton"
+        class="logout-button"
+    >
+        Logout
+    </button>
+
+
 </div>
 
 
 </header>
+
 
 <!-- =========================================
      DASHBOARD CONTENT
@@ -922,6 +977,7 @@
 
 </div>
 
+
 <!-- =========================================
      ADMIN FOOTER
 ========================================= -->
@@ -944,45 +1000,169 @@
 
 </footer>
 
+
 </main>
 
+
 <!-- =========================================
-     JAVASCRIPT
+     SUPABASE
 ========================================= -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="../supabase.js"></script>
 
+
 <!-- =========================================
-     ADMIN LOGIN PROTECTION
+     ADMIN AUTHENTICATION + LOGOUT
 ========================================= -->
 
 <script>
+
 (async function protectAdmin() {
 
     try {
 
-        const { data, error } =
-            await supabaseClient.auth.getSession();
+        if (
+            !window.supabase ||
+            typeof supabaseClient === "undefined"
+        ) {
 
-        if (error || !data.session) {
+            console.error(
+                "DΛMZΞΞ NEWS: Supabase client unavailable."
+            );
 
             window.location.replace("login.html");
 
             return;
+
         }
 
-    } catch (error) {
 
-        console.error("Admin authentication check failed:", error);
+        const {
+            data,
+            error
+        } = await supabaseClient.auth.getSession();
+
+
+        if (error) {
+
+            console.error(
+                "DΛMZΞΞ NEWS: Authentication check failed.",
+                error
+            );
+
+            window.location.replace("login.html");
+
+            return;
+
+        }
+
+
+        if (
+            !data ||
+            !data.session
+        ) {
+
+            window.location.replace("login.html");
+
+            return;
+
+        }
+
+
+        /* Authentication successful */
+
+        document.body.classList.remove("admin-loading");
+
+
+        /* =========================================
+           LOGOUT
+        ========================================= */
+
+        const logoutButton =
+            document.getElementById("logoutButton");
+
+
+        if (logoutButton) {
+
+            logoutButton.addEventListener(
+                "click",
+                async () => {
+
+                    logoutButton.disabled = true;
+
+                    logoutButton.textContent =
+                        "Logging out...";
+
+
+                    try {
+
+                        const {
+                            error: logoutError
+                        } =
+                            await supabaseClient.auth.signOut();
+
+
+                        if (logoutError) {
+
+                            console.error(
+                                "DΛMZΞΞ NEWS: Logout failed.",
+                                logoutError
+                            );
+
+                            logoutButton.disabled = false;
+
+                            logoutButton.textContent =
+                                "Logout";
+
+                            return;
+
+                        }
+
+
+                        window.location.replace(
+                            "login.html"
+                        );
+
+                    }
+
+                    catch (error) {
+
+                        console.error(
+                            "DΛMZΞΞ NEWS: Logout error.",
+                            error
+                        );
+
+                        logoutButton.disabled = false;
+
+                        logoutButton.textContent =
+                            "Logout";
+
+                    }
+
+                }
+            );
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "DΛMZΞΞ NEWS: Admin authentication error.",
+            error
+        );
 
         window.location.replace("login.html");
 
     }
 
 })();
+
 </script>
+
 
 <!-- =========================================
      ADMIN DASHBOARD SCRIPT
@@ -990,6 +1170,8 @@
 
 <script src="script.js"></script>
 
+
 </body>
 
 </html>
+
