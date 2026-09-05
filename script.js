@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
 
 const searchForm = document.getElementById("searchForm");
@@ -519,7 +520,7 @@ if (searchForm) {
 
 if (newsletterForm) {
 
-    newsletterForm.addEventListener("submit", event => {
+    newsletterForm.addEventListener("submit", async event => {
 
         event.preventDefault();
 
@@ -527,8 +528,13 @@ if (newsletterForm) {
             document.getElementById("newsletterEmail");
 
         const email = emailInput
-            ? emailInput.value.trim()
+            ? emailInput.value.trim().toLowerCase()
             : "";
+
+
+        /* -----------------------------------------
+           CHECK EMAIL
+        ----------------------------------------- */
 
         if (!email) {
 
@@ -539,13 +545,132 @@ if (newsletterForm) {
             return;
         }
 
-        alert(
-            "Newsletter system will be connected to the database next."
-        );
 
-        newsletterForm.reset();
+        const emailPattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!emailPattern.test(email)) {
+
+            alert(
+                "Please enter a valid email address."
+            );
+
+            return;
+        }
+
+
+        /* -----------------------------------------
+           SUBSCRIBE BUTTON
+        ----------------------------------------- */
+
+        const submitButton =
+            newsletterForm.querySelector(
+                'button[type="submit"], input[type="submit"]'
+            );
+
+        if (submitButton) {
+
+            submitButton.disabled = true;
+
+            if (submitButton.tagName === "INPUT") {
+                submitButton.value = "Subscribing...";
+            } else {
+                submitButton.textContent = "Subscribing...";
+            }
+
+        }
+
+
+        /* -----------------------------------------
+           SAVE SUBSCRIBER
+        ----------------------------------------- */
+
+        try {
+
+            const { error } = await supabaseClient
+                .from("newsletter_subscribers")
+                .insert([
+                    {
+                        email: email
+                    }
+                ]);
+
+
+            /* -----------------------------------------
+               DATABASE ERROR
+            ----------------------------------------- */
+
+            if (error) {
+
+                console.error(
+                    "DΛMZΞΞ NEWS: Newsletter subscription failed:",
+                    error
+                );
+
+
+                /*
+                 * PostgreSQL error 23505 means
+                 * the email already exists.
+                 */
+
+                if (error.code === "23505") {
+
+                    alert(
+                        "This email is already subscribed to DΛMZΞΞ NEWS."
+                    );
+
+                } else {
+
+                    alert(
+                        "Unable to subscribe right now. Please try again."
+                    );
+
+                }
+
+                return;
+            }
+
+
+            /* -----------------------------------------
+               SUCCESS
+            ----------------------------------------- */
+
+            alert(
+                "You're subscribed! Welcome to DΛMZΞΞ NEWS."
+            );
+
+            newsletterForm.reset();
+
+
+        } catch (error) {
+
+            console.error(
+                "DΛMZΞΞ NEWS: Newsletter error:",
+                error
+            );
+
+            alert(
+                "Something went wrong. Please try again."
+            );
+
+        } finally {
+
+            if (submitButton) {
+
+                submitButton.disabled = false;
+
+                if (submitButton.tagName === "INPUT") {
+                    submitButton.value = "Subscribe";
+                } else {
+                    submitButton.textContent = "Subscribe";
+                }
+
+            }
+
+        }
 
     });
+
 }
 
 
@@ -580,6 +705,7 @@ if (backToTop) {
         });
 
     });
+
 }
 
 
@@ -604,6 +730,7 @@ async function loadHomepage() {
     console.log(
         `DΛMZΞΞ NEWS: ${articles.length} published article(s) loaded.`
     );
+
 }
 
 

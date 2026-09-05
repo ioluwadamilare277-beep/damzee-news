@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
 
 const articleForm =
@@ -74,8 +75,33 @@ document.getElementById("articleStatus");
 const articleBreaking =
 document.getElementById("articleBreaking");
 
+
+/* ==============================
+NEWSLETTER ELEMENTS
+============================== */
+
+const subscriberCount =
+document.getElementById("subscriberCount");
+
+const subscriberList =
+document.getElementById("subscriberList");
+
+
 let editingArticleId = null;
+
 let articlesCache = [];
+
+
+/* ==============================
+NEWSLETTER PAGINATION
+============================== */
+
+let subscriberPage = 1;
+
+const subscribersPerPage = 20;
+
+let subscriberSearchTerm = "";
+
 
 /* ==============================
 SUPABASE CHECK
@@ -97,6 +123,7 @@ if (systemStatus) {
 return;
 
 }
+
 
 /* ==============================
 GET ARTICLES FROM SUPABASE
@@ -152,6 +179,7 @@ catch (error) {
 
 }
 
+
 /* ==============================
 GET ACTIVITY
 Kept in localStorage for now
@@ -194,6 +222,7 @@ catch (error) {
 
 }
 
+
 /* ==============================
 SAVE ACTIVITY
 ============================== */
@@ -206,6 +235,7 @@ localStorage.setItem(
 );
 
 }
+
 
 /* ==============================
 ADD ACTIVITY
@@ -273,6 +303,7 @@ saveActivity(
 updateActivityList();
 
 }
+
 
 /* ==============================
 UPDATE ACTIVITY LIST
@@ -454,6 +485,7 @@ activity.forEach(
 
 }
 
+
 /* ==============================
 GET NOTIFICATIONS
 Kept in localStorage for now
@@ -494,6 +526,7 @@ catch (error) {
 
 }
 
+
 /* ==============================
 SAVE NOTIFICATIONS
 ============================== */
@@ -510,6 +543,7 @@ localStorage.setItem(
 );
 
 }
+
 
 /* ==============================
 ADD NOTIFICATION
@@ -576,6 +610,7 @@ saveNotifications(
 updateNotifications();
 
 }
+
 
 /* ==============================
 UPDATE NOTIFICATIONS
@@ -872,6 +907,7 @@ notifications
 
 }
 
+
 /* ==============================
 NOTIFICATION BELL
 ============================== */
@@ -920,6 +956,7 @@ document.addEventListener(
 
 }
 
+
 /* ==============================
 MARK NOTIFICATIONS READ
 ============================== */
@@ -955,6 +992,7 @@ markNotificationsRead.addEventListener(
 );
 
 }
+
 
 /* ==============================
 MOBILE MENU
@@ -1003,6 +1041,7 @@ sidebarLinks.forEach(
 
 }
 
+
 /* ==============================
 SYSTEM STATUS
 ============================== */
@@ -1038,6 +1077,7 @@ if (lastActive) {
 
 }
 
+
 /* ==============================
 UPDATE TOTAL VIEWS
 ============================== */
@@ -1069,6 +1109,7 @@ if (totalViews) {
 }
 
 }
+
 
 /* ==============================
 VIEWS ANALYTICS
@@ -1278,6 +1319,7 @@ articles
     );
 
 }
+
 
 /* ==============================
 CATEGORY PERFORMANCE
@@ -1543,6 +1585,7 @@ categories.forEach(
 
 }
 
+
 /* ==============================
 RESET ARTICLE FORM
 ============================== */
@@ -1567,7 +1610,7 @@ const authorInput =
 if (authorInput) {
 
     authorInput.value =
-        "DAMZEE NEWS";
+        "DΛMZΞΞ NEWS";
 
 }
 
@@ -1618,6 +1661,7 @@ if (panelHeading) {
 }
 
 }
+
 
 /* ==============================
 CHANGE ARTICLE STATUS
@@ -1732,6 +1776,7 @@ else {
 await refreshAdmin();
 
 }
+
 
 /* ==============================
 DISPLAY ARTICLES
@@ -2003,7 +2048,7 @@ articles.forEach(
             "By " +
             (
                 article.author ||
-                "DAMZEE NEWS"
+                "DΛMZΞΞ NEWS"
             ) +
             " · " +
             (
@@ -2106,8 +2151,6 @@ articles.forEach(
             "wrap";
 
 
-        /* VIEW */
-
         const viewButton =
             document.createElement("button");
 
@@ -2136,8 +2179,6 @@ articles.forEach(
         );
 
 
-        /* EDIT */
-
         const editButton =
             document.createElement("button");
 
@@ -2163,8 +2204,6 @@ articles.forEach(
             }
         );
 
-
-        /* STATUS */
 
         const statusButton =
             document.createElement("button");
@@ -2194,8 +2233,6 @@ articles.forEach(
             }
         );
 
-
-        /* DELETE */
 
         const deleteButton =
             document.createElement("button");
@@ -2317,6 +2354,7 @@ articles.forEach(
 
 }
 
+
 /* ==============================
 START EDITING
 ============================== */
@@ -2388,7 +2426,7 @@ if (authorInput) {
 
     authorInput.value =
         article.author ||
-        "DAMZEE NEWS";
+        "DΛMZΞΞ NEWS";
 
 }
 
@@ -2481,6 +2519,7 @@ if (newArticleSection) {
 }
 
 }
+
 
 /* ==============================
 SAVE ARTICLE
@@ -2576,10 +2615,6 @@ articleForm.addEventListener(
 
         }
 
-
-        /* ==============================
-           UPDATE EXISTING
-        ============================== */
 
         if (
             editingArticleId !== null
@@ -2725,10 +2760,6 @@ articleForm.addEventListener(
         }
 
 
-        /* ==============================
-           CREATE NEW ARTICLE
-        ============================== */
-
         else {
 
             const {
@@ -2868,6 +2899,7 @@ articleForm.addEventListener(
 
 }
 
+
 /* ==============================
 CLEAR FORM
 ============================== */
@@ -2888,8 +2920,9 @@ clearForm.addEventListener(
 
 }
 
+
 /* ==============================
-SEARCH
+ARTICLE SEARCH
 ============================== */
 
 if (articleSearch) {
@@ -2904,6 +2937,7 @@ articleSearch.addEventListener(
 );
 
 }
+
 
 /* ==============================
 CATEGORY FILTER
@@ -2922,6 +2956,7 @@ articleFilter.addEventListener(
 
 }
 
+
 /* ==============================
 STATUS FILTER
 ============================== */
@@ -2938,6 +2973,716 @@ articleStatusFilter.addEventListener(
 );
 
 }
+
+
+/* ==============================
+NEWSLETTER SUBSCRIBERS
+Paginated + Search
+============================== */
+
+async function loadNewsletterSubscribers() {
+
+if (
+!subscriberCount ||
+!subscriberList
+) {
+    return;
+}
+
+
+/* ==============================
+CREATE CONTROLS
+============================== */
+
+let subscriberControls =
+    document.getElementById(
+        "subscriberControls"
+    );
+
+
+if (!subscriberControls) {
+
+    subscriberControls =
+        document.createElement("div");
+
+    subscriberControls.id =
+        "subscriberControls";
+
+    subscriberControls.style.marginBottom =
+        "18px";
+
+
+    const searchInput =
+        document.createElement("input");
+
+
+    searchInput.type =
+        "search";
+
+
+    searchInput.id =
+        "subscriberSearch";
+
+
+    searchInput.placeholder =
+        "Search subscribers by email...";
+
+
+    searchInput.setAttribute(
+        "aria-label",
+        "Search newsletter subscribers"
+    );
+
+
+    searchInput.style.width =
+        "100%";
+
+
+    searchInput.style.padding =
+        "12px 14px";
+
+
+    searchInput.style.border =
+        "1px solid #dfe5ec";
+
+
+    searchInput.style.borderRadius =
+        "8px";
+
+
+    searchInput.style.fontSize =
+        "13px";
+
+
+    searchInput.style.outline =
+        "none";
+
+
+    searchInput.style.boxSizing =
+        "border-box";
+
+
+    searchInput.addEventListener(
+        "input",
+        () => {
+
+            subscriberSearchTerm =
+                searchInput.value
+                    .trim()
+                    .toLowerCase();
+
+
+            subscriberPage =
+                1;
+
+
+            loadNewsletterSubscribers();
+
+        }
+    );
+
+
+    subscriberControls.appendChild(
+        searchInput
+    );
+
+
+    subscriberList.parentElement.insertBefore(
+        subscriberControls,
+        subscriberList
+    );
+
+}
+
+
+/* ==============================
+SHOW LOADING
+============================== */
+
+subscriberList.innerHTML = `
+    <div class="empty-subscribers">
+        <p>Loading subscribers...</p>
+    </div>
+`;
+
+
+try {
+
+
+/* ==============================
+BUILD QUERY
+============================== */
+
+let query =
+    supabaseClient
+        .from("newsletter_subscribers")
+        .select(
+            "id, email, subscribed_at, active",
+            {
+                count: "exact"
+            }
+        )
+        .eq(
+            "active",
+            true
+        );
+
+
+/* ==============================
+SEARCH
+============================== */
+
+if (
+    subscriberSearchTerm
+) {
+
+    query =
+        query.ilike(
+            "email",
+            "%" +
+            subscriberSearchTerm +
+            "%"
+        );
+
+}
+
+
+/* ==============================
+PAGE RANGE
+============================== */
+
+const start =
+    (
+        subscriberPage -
+        1
+    ) *
+    subscribersPerPage;
+
+
+const end =
+    start +
+    subscribersPerPage -
+    1;
+
+
+const {
+    data,
+    error,
+    count
+} = await query
+    .order(
+        "subscribed_at",
+        {
+            ascending: false
+        }
+    )
+    .range(
+        start,
+        end
+    );
+
+
+/* ==============================
+ERROR
+============================== */
+
+if (error) {
+
+    console.error(
+        "DΛMZΞΞ NEWS: Unable to load newsletter subscribers.",
+        error
+    );
+
+
+    subscriberCount.textContent =
+        "0";
+
+
+    subscriberList.innerHTML = `
+        <div class="empty-subscribers">
+            <p>Unable to load subscribers.</p>
+        </div>
+    `;
+
+
+    return;
+
+}
+
+
+/* ==============================
+TOTAL COUNT
+============================== */
+
+const totalSubscribers =
+    Number(count) || 0;
+
+
+subscriberCount.textContent =
+    totalSubscribers.toLocaleString();
+
+
+/* ==============================
+NO RESULTS
+============================== */
+
+if (
+    totalSubscribers === 0
+) {
+
+    subscriberList.innerHTML = `
+        <div class="empty-subscribers">
+            <p>${
+                subscriberSearchTerm
+                    ? "No subscribers found."
+                    : "No subscribers yet."
+            }</p>
+        </div>
+    `;
+
+
+    return;
+
+}
+
+
+/* ==============================
+DISPLAY
+============================== */
+
+subscriberList.innerHTML =
+    "";
+
+
+const subscribers =
+    Array.isArray(data)
+        ? data
+        : [];
+
+
+subscribers.forEach(
+    subscriber => {
+
+
+        const row =
+            document.createElement("div");
+
+
+        row.className =
+            "subscriber-row";
+
+
+        const information =
+            document.createElement("div");
+
+
+        information.className =
+            "subscriber-info";
+
+
+        const email =
+            document.createElement("strong");
+
+
+        email.textContent =
+            subscriber.email;
+
+
+        const date =
+            document.createElement("small");
+
+
+        if (
+            subscriber.subscribed_at
+        ) {
+
+            date.textContent =
+                "Subscribed: " +
+                new Date(
+                    subscriber.subscribed_at
+                ).toLocaleString(
+                    "en-GB",
+                    {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit"
+                    }
+                );
+
+        }
+
+        else {
+
+            date.textContent =
+                "Subscription date unavailable";
+
+        }
+
+
+        /* ==============================
+        DELETE
+        ============================== */
+
+        const deleteButton =
+            document.createElement("button");
+
+
+        deleteButton.type =
+            "button";
+
+
+        deleteButton.className =
+            "secondary-button";
+
+
+        deleteButton.textContent =
+            "Delete";
+
+
+        deleteButton.addEventListener(
+            "click",
+            async () => {
+
+
+                const confirmed =
+                    confirm(
+                        "Remove " +
+                        subscriber.email +
+                        " from newsletter subscribers?"
+                    );
+
+
+                if (!confirmed) {
+                    return;
+                }
+
+
+                deleteButton.disabled =
+                    true;
+
+
+                deleteButton.textContent =
+                    "Deleting...";
+
+
+                const {
+                    error
+                } = await supabaseClient
+                    .from(
+                        "newsletter_subscribers"
+                    )
+                    .delete()
+                    .eq(
+                        "id",
+                        subscriber.id
+                    );
+
+
+                if (error) {
+
+                    console.error(
+                        "DΛMZΞΞ NEWS: Unable to delete subscriber.",
+                        error
+                    );
+
+
+                    alert(
+                        "Unable to delete subscriber.\n\n" +
+                        error.message
+                    );
+
+
+                    deleteButton.disabled =
+                        false;
+
+
+                    deleteButton.textContent =
+                        "Delete";
+
+
+                    return;
+
+                }
+
+
+                /*
+                If the last subscriber
+                on this page is deleted,
+                move back one page.
+                */
+
+                const remainingOnPage =
+                    subscribers.length - 1;
+
+
+                if (
+                    remainingOnPage === 0 &&
+                    subscriberPage > 1
+                ) {
+
+                    subscriberPage--;
+
+                }
+
+
+                await loadNewsletterSubscribers();
+
+            }
+        );
+
+
+        information.appendChild(
+            email
+        );
+
+
+        information.appendChild(
+            date
+        );
+
+
+        row.appendChild(
+            information
+        );
+
+
+        row.appendChild(
+            deleteButton
+        );
+
+
+        subscriberList.appendChild(
+            row
+        );
+
+    }
+);
+
+
+/* ==============================
+PAGINATION
+============================== */
+
+const totalPages =
+    Math.ceil(
+        totalSubscribers /
+        subscribersPerPage
+    );
+
+
+const oldPagination =
+    document.getElementById(
+        "subscriberPagination"
+    );
+
+
+if (oldPagination) {
+
+    oldPagination.remove();
+
+}
+
+
+if (
+    totalPages > 1
+) {
+
+
+    const pagination =
+        document.createElement("div");
+
+
+    pagination.id =
+        "subscriberPagination";
+
+
+    pagination.style.display =
+        "flex";
+
+
+    pagination.style.alignItems =
+        "center";
+
+
+    pagination.style.justifyContent =
+        "center";
+
+
+    pagination.style.gap =
+        "12px";
+
+
+    pagination.style.marginTop =
+        "20px";
+
+
+    pagination.style.flexWrap =
+        "wrap";
+
+
+    /* ==============================
+    PREVIOUS
+    ============================== */
+
+    const previousButton =
+        document.createElement("button");
+
+
+    previousButton.type =
+        "button";
+
+
+    previousButton.className =
+        "secondary-button";
+
+
+    previousButton.textContent =
+        "← Previous";
+
+
+    previousButton.disabled =
+        subscriberPage === 1;
+
+
+    previousButton.addEventListener(
+        "click",
+        () => {
+
+            if (
+                subscriberPage <= 1
+            ) {
+                return;
+            }
+
+
+            subscriberPage--;
+
+
+            loadNewsletterSubscribers();
+
+        }
+    );
+
+
+    /* ==============================
+    PAGE NUMBER
+    ============================== */
+
+    const pageText =
+        document.createElement("span");
+
+
+    pageText.textContent =
+        "Page " +
+        subscriberPage +
+        " of " +
+        totalPages;
+
+
+    pageText.style.fontSize =
+        "13px";
+
+
+    pageText.style.color =
+        "#788396";
+
+
+    pageText.style.fontWeight =
+        "600";
+
+
+    /* ==============================
+    NEXT
+    ============================== */
+
+    const nextButton =
+        document.createElement("button");
+
+
+    nextButton.type =
+        "button";
+
+
+    nextButton.className =
+        "secondary-button";
+
+
+    nextButton.textContent =
+        "Next →";
+
+
+    nextButton.disabled =
+        subscriberPage >= totalPages;
+
+
+    nextButton.addEventListener(
+        "click",
+        () => {
+
+            if (
+                subscriberPage >= totalPages
+            ) {
+                return;
+            }
+
+
+            subscriberPage++;
+
+
+            loadNewsletterSubscribers();
+
+        }
+    );
+
+
+    pagination.appendChild(
+        previousButton
+    );
+
+
+    pagination.appendChild(
+        pageText
+    );
+
+
+    pagination.appendChild(
+        nextButton
+    );
+
+
+    subscriberList.parentElement.appendChild(
+        pagination
+    );
+
+}
+
+
+}
+
+catch (error) {
+
+    console.error(
+        "DΛMZΞΞ NEWS: Newsletter subscriber error.",
+        error
+    );
+
+
+    subscriberCount.textContent =
+        "0";
+
+
+    subscriberList.innerHTML = `
+        <div class="empty-subscribers">
+            <p>Unable to load subscribers.</p>
+        </div>
+    `;
+
+}
+
+}
+
 
 /* ==============================
 REFRESH ADMIN
@@ -2968,7 +3713,10 @@ updateNotifications();
 
 updateSystemStatus();
 
+await loadNewsletterSubscribers();
+
 }
+
 
 /* ==============================
 START ADMIN
@@ -2976,8 +3724,10 @@ START ADMIN
 
 refreshAdmin();
 
+
 console.log(
 "DΛMZΞΞ NEWS admin connected to Supabase."
 );
 
 });
+

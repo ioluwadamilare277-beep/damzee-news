@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -51,6 +50,45 @@ body.admin-loading {
     cursor: not-allowed;
 }
 
+/* Newsletter subscriber summary */
+
+.subscriber-summary {
+    min-width: 120px;
+    padding: 14px 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    background: #f8fafc;
+    text-align: center;
+}
+
+.subscriber-summary strong {
+    display: block;
+    font-size: 26px;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.subscriber-summary span {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #6b7280;
+}
+
+.subscriber-list {
+    width: 100%;
+}
+
+.empty-subscribers {
+    padding: 30px;
+    text-align: center;
+    color: #6b7280;
+    border: 1px dashed #d7dce5;
+    border-radius: 10px;
+}
+
 </style>
 
 </head>
@@ -100,6 +138,11 @@ body.admin-loading {
     <a href="#articles">
         <span class="nav-icon">▤</span>
         <span>Articles</span>
+    </a>
+
+    <a href="#newsletter">
+        <span class="nav-icon">✉</span>
+        <span>Newsletter</span>
     </a>
 
     <a href="#analytics">
@@ -444,6 +487,67 @@ body.admin-loading {
 
     </div>
 
+
+</section>
+
+
+<!-- =========================================
+     NEWSLETTER SUBSCRIBERS
+========================================= -->
+
+<section
+    class="admin-panel"
+    id="newsletter"
+>
+
+    <div class="panel-header">
+
+        <div>
+
+            <span class="eyebrow">
+                NEWSLETTER
+            </span>
+
+            <h2>
+                Newsletter Subscribers
+            </h2>
+
+            <p>
+                Manage people subscribed to DΛMZΞΞ NEWS updates.
+            </p>
+
+        </div>
+
+
+        <div class="subscriber-summary">
+
+            <strong id="subscriberCount">
+                0
+            </strong>
+
+            <span>
+                Subscribers
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <div
+        class="subscriber-list"
+        id="subscriberList"
+    >
+
+        <div class="empty-subscribers">
+
+            <p>
+                Loading subscribers...
+            </p>
+
+        </div>
+
+    </div>
 
 </section>
 
@@ -1174,4 +1278,3 @@ body.admin-loading {
 </body>
 
 </html>
-
