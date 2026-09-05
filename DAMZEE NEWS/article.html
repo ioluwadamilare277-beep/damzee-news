@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>DΛMZΞΞ NEWS</title>
+<meta name="description" content="DΛMZΞΞ NEWS article">
+<meta name="theme-color" content="#111827">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #f3f5f8;
+        color: #172033;
+        line-height: 1.7;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    img {
+        max-width: 100%;
+        display: block;
+    }
+
+    .container {
+        width: 92%;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    header {
+        background: #111827;
+        color: white;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 3px 12px rgba(0,0,0,.15);
+    }
+
+    .header-inner {
+        min-height: 72px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 25px;
+    }
+
+    .logo {
+        font-size: 25px;
+        font-weight: 900;
+        letter-spacing: 1px;
+        white-space: nowrap;
+    }
+
+    .logo span {
+        color: #ef4444;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+    }
+
+    nav a {
+        font-size: 14px;
+        font-weight: 700;
+        color: #dbe3ef;
+        transition: .2s;
+    }
+
+    nav a:hover {
+        color: #ef4444;
+    }
+
+    .search-box {
+        display: flex;
+        align-items: center;
+        background: white;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .search-box input {
+        border: 0;
+        outline: 0;
+        padding: 10px 12px;
+        width: 170px;
+        font-size: 13px;
+    }
+
+    .search-box button {
+        border: 0;
+        background: #ef4444;
+        color: white;
+        padding: 10px 13px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .breaking {
+        background: #ef4444;
+        color: white;
+        overflow: hidden;
+    }
+
+    .breaking-inner {
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .breaking-label {
+        background: #991b1b;
+        padding: 5px 10px;
+        font-size: 12px;
+        font-weight: 900;
+        white-space: nowrap;
+    }
+
+    .breaking-content {
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .article-page {
+        padding: 45px 0 70px;
+    }
+
+    .article-wrapper {
+        background: white;
+        max-width: 900px;
+        margin: auto;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0,0,0,.07);
+    }
+
+    .article-header {
+        padding: 35px 40px 25px;
+    }
+
+    .article-category {
+        display: inline-block;
+        background: #ef4444;
+        color: white;
+        padding: 5px 11px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+    }
+
+    .article-title {
+        font-size: 42px;
+        line-height: 1.15;
+        color: #111827;
+        margin-bottom: 18px;
+        font-weight: 900;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        color: #6b7280;
+        font-size: 13px;
+    }
+
+    .article-image {
+        width: 100%;
+        max-height: 520px;
+        object-fit: cover;
+    }
+
+    .no-image {
+        width: 100%;
+        height: 360px;
+        background: #e5e7eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6b7280;
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: 1px;
+    }
+
+    .article-content {
+        padding: 35px 40px 45px;
+        font-size: 18px;
+        color: #374151;
+    }
+
+    .article-content p {
+        margin-bottom: 22px;
+    }
+
+    .article-content p:first-child {
+        font-size: 19px;
+        color: #1f2937;
+    }
+
+    .share-section {
+        padding: 0 40px 35px;
+        border-top: 1px solid #e5e7eb;
+        padding-top: 25px;
+    }
+
+    .share-section h3 {
+        font-size: 15px;
+        margin-bottom: 12px;
+        color: #111827;
+    }
+
+    .share-buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .share-btn {
+        border: 0;
+        padding: 9px 14px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 12px;
+    }
+
+    .facebook {
+        background: #1877f2;
+        color: white;
+    }
+
+    .twitter {
+        background: #111827;
+        color: white;
+    }
+
+    .whatsapp {
+        background: #25d366;
+        color: white;
+    }
+
+    .copy-link {
+        background: #e5e7eb;
+        color: #111827;
+    }
+
+    .related {
+        padding: 0 40px 45px;
+    }
+
+    .related h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+        color: #111827;
+    }
+
+    .related-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+    }
+
+    .related-card {
+        border: 1px solid #e5e7eb;
+        border-radius: 7px;
+        overflow: hidden;
+        background: white;
+        transition: .2s;
+    }
+
+    .related-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0,0,0,.08);
+    }
+
+    .related-card img {
+        width: 100%;
+        height: 130px;
+        object-fit: cover;
+        background: #e5e7eb;
+    }
+
+    .related-no-image {
+        width: 100%;
+        height: 130px;
+        background: #e5e7eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #6b7280;
+        font-size: 12px;
+        font-weight: 800;
+    }
+
+    .related-info {
+        padding: 12px;
+    }
+
+    .related-category {
+        color: #ef4444;
+        font-size: 10px;
+        font-weight: 800;
+        text-transform: uppercase;
+    }
+
+    .related-info h3 {
+        font-size: 15px;
+        line-height: 1.35;
+        margin-top: 5px;
+        color: #111827;
+    }
+
+    .message-box {
+        max-width: 700px;
+        margin: 70px auto;
+        text-align: center;
+        background: white;
+        padding: 50px 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 20px rgba(0,0,0,.07);
+    }
+
+    .message-box h2 {
+        margin-bottom: 10px;
+        color: #111827;
+    }
+
+    .message-box p {
+        color: #6b7280;
+        margin-bottom: 20px;
+    }
+
+    .home-btn {
+        display: inline-block;
+        background: #ef4444;
+        color: white;
+        padding: 10px 18px;
+        border-radius: 5px;
+        font-weight: 700;
+    }
+
+    footer {
+        background: #111827;
+        color: #9ca3af;
+        padding: 35px 0;
+        text-align: center;
+        font-size: 13px;
+    }
+
+    footer strong {
+        color: white;
+    }
+
+    @media (max-width: 800px) {
+
+        nav {
+            display: none;
+        }
+
+        .header-inner {
+            min-height: 65px;
+        }
+
+        .search-box input {
+            width: 120px;
+        }
+
+        .article-header {
+            padding: 25px 20px 20px;
+        }
+
+        .article-title {
+            font-size: 30px;
+        }
+
+        .article-content {
+            padding: 25px 20px 35px;
+            font-size: 17px;
+        }
+
+        .share-section,
+        .related {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .related-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .related-card img,
+        .related-no-image {
+            height: 180px;
+        }
+    }
+
+    @media (max-width: 500px) {
+
+        .logo {
+            font-size: 20px;
+        }
+
+        .search-box input {
+            width: 95px;
+        }
+
+        .article-title {
+            font-size: 27px;
+        }
+
+        .article-meta {
+            gap: 8px;
+            flex-direction: column;
+        }
+
+        .no-image {
+            height: 250px;
+        }
+    }
+</style>
+
+
+</head>
+
+<body>
+
+<header>
+    <div class="container header-inner">
+
+
+    <a href="index.html" class="logo">
+        DΛMZΞΞ <span>NEWS</span>
+    </a>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="category.html?category=News">News</a>
+        <a href="category.html?category=Politics">Politics</a>
+        <a href="category.html?category=Sports">Sports</a>
+        <a href="category.html?category=Entertainment">Entertainment</a>
+    </nav>
+
+    <form class="search-box" id="searchForm">
+        <input type="text" id="searchInput" placeholder="Search news...">
+        <button type="submit">⌕</button>
+    </form>
+
+</div>
+
+
+</header>
+
+<section class="breaking">
+    <div class="container breaking-inner">
+
+
+    <div class="breaking-label">
+        BREAKING
+    </div>
+
+    <div class="breaking-content" id="breakingContent">
+        Loading latest news...
+    </div>
+
+</div>
+
+
+</section>
+
+<main class="article-page">
+
+
+<div id="articleContainer">
+
+    <div class="message-box">
+        <h2>Loading article...</h2>
+        <p>Please wait.</p>
+    </div>
+
+</div>
+
+
+</main>
+
+<footer>
+    <div class="container">
+        © <span id="year"></span>
+        <strong>DΛMZΞΞ NEWS</strong>.
+        All Rights Reserved.
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="supabase.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const articleContainer =
+        document.getElementById("articleContainer");
+
+    const breakingContent =
+        document.getElementById("breakingContent");
+
+    const searchForm =
+        document.getElementById("searchForm");
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+    const year =
+        document.getElementById("year");
+
+    if (year) {
+        year.textContent =
+            new Date().getFullYear();
+    }
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const articleId =
+        params.get("id");
+
+    let currentArticle = null;
+
+
+    /* =========================================
+       SECURITY
+    ========================================= */
+
+    function escapeHTML(value) {
+
+        const div =
+            document.createElement("div");
+
+        div.textContent =
+            value ?? "";
+
+        return div.innerHTML;
+    }
+
+
+    /* =========================================
+       LOCAL STORAGE FALLBACK
+    ========================================= */
+
+    function getLocalArticles() {
+
+        try {
+
+            return JSON.parse(
+                localStorage.getItem(
+                    "damzeeArticles"
+                ) || "[]"
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Could not read local articles:",
+                error
+            );
+
+            return [];
+        }
+    }
+
+
+    function findLocalArticle(id) {
+
+        const articles =
+            getLocalArticles();
+
+        return articles.find(
+            article =>
+                String(article.id) ===
+                String(id)
+        );
+    }
+
+
+    /* =========================================
+       FORMAT CONTENT
+    ========================================= */
+
+    function formatContent(content) {
+
+        if (!content) {
+
+            return `
+                <p>No article content available.</p>
+            `;
+        }
+
+        return String(content)
+            .split(/\n\s*\n|\r\n\r\n/)
+            .map(
+                paragraph =>
+                    paragraph.trim()
+            )
+            .filter(Boolean)
+            .map(
+                paragraph => `
+                    <p>
+                        ${escapeHTML(
+                            paragraph
+                        ).replace(
+                            /\n/g,
+                            "<br>"
+                        )}
+                    </p>
+                `
+            )
+            .join("");
+    }
+
+
+    /* =========================================
+       RENDER ARTICLE
+    ========================================= */
+
+    function renderArticle(article) {
+
+        currentArticle =
+            article;
+
+        const title =
+            article.title ||
+            "Untitled Article";
+
+        const category =
+            article.category ||
+            "News";
+
+        const author =
+            article.author ||
+            "DΛMZΞΞ";
+
+        const date =
+            article.date ||
+            article.created_at ||
+            "";
+
+
+        document.title =
+            `${title} | DΛMZΞΞ NEWS`;
+
+
+        let imageHTML = "";
+
+
+        if (
+            article.image &&
+            String(article.image).trim() !== ""
+        ) {
+
+            imageHTML = `
+                <img
+                    src="${escapeHTML(
+                        article.image
+                    )}"
+                    alt="${escapeHTML(
+                        title
+                    )}"
+                    class="article-image"
+                    onerror="this.style.display='none'"
+                >
+            `;
+
+        } else {
+
+            imageHTML = `
+                <div class="no-image">
+                    DΛMZΞΞ NEWS
+                </div>
+            `;
+        }
+
+
+        articleContainer.innerHTML = `
+
+            <article class="article-wrapper">
+
+                <div class="article-header">
+
+                    <div class="article-category">
+                        ${escapeHTML(
+                            category
+                        )}
+                    </div>
+
+                    <h1 class="article-title">
+                        ${escapeHTML(
+                            title
+                        )}
+                    </h1>
+
+                    <div class="article-meta">
+
+                        <span>
+                            By ${escapeHTML(
+                                author
+                            )}
+                        </span>
+
+                        <span>
+                            ${escapeHTML(
+                                String(date)
+                            )}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                ${imageHTML}
+
+                <div class="article-content">
+
+                    ${formatContent(
+                        article.content ||
+                        article.summary
+                    )}
+
+                </div>
+
+                <div class="share-section">
+
+                    <h3>
+                        Share this article
+                    </h3>
+
+                    <div class="share-buttons">
+
+                        <button
+                            class="share-btn facebook"
+                            id="facebookShare"
+                        >
+                            Facebook
+                        </button>
+
+                        <button
+                            class="share-btn twitter"
+                            id="twitterShare"
+                        >
+                            X / Twitter
+                        </button>
+
+                        <button
+                            class="share-btn whatsapp"
+                            id="whatsappShare"
+                        >
+                            WhatsApp
+                        </button>
+
+                        <button
+                            class="share-btn copy-link"
+                            id="copyLink"
+                        >
+                            Copy Link
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <section class="related">
+
+                    <h2>
+                        Related Stories
+                    </h2>
+
+                    <div
+                        class="related-grid"
+                        id="relatedGrid"
+                    >
+                        <p>
+                            Loading related stories...
+                        </p>
+                    </div>
+
+                </section>
+
+            </article>
+        `;
+
+
+        setupSharing();
+
+        loadRelatedStories(article);
+
+        increaseViews(article);
+    }
+
+
+    /* =========================================
+       LOAD ARTICLE
+    ========================================= */
+
+    async function loadArticle() {
+
+        if (!articleId) {
+
+            showError(
+                "Article not found",
+                "No article ID was provided."
+            );
+
+            return;
+        }
+
+
+        let supabaseArticle = null;
+
+
+        if (
+            typeof supabaseClient !==
+                "undefined" &&
+            supabaseClient
+        ) {
+
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient
+                        .from("articles")
+                        .select("*")
+                        .eq(
+                            "id",
+                            articleId
+                        )
+                        .eq(
+                            "status",
+                            "published"
+                        )
+                        .maybeSingle();
+
+
+                if (error) {
+
+                    console.error(
+                        "Supabase article error:",
+                        error
+                    );
+
+                } else if (data) {
+
+                    supabaseArticle =
+                        data;
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Supabase connection error:",
+                    error
+                );
+            }
+        }
+
+
+        if (supabaseArticle) {
+
+            renderArticle(
+                supabaseArticle
+            );
+
+        } else {
+
+            const localArticle =
+                findLocalArticle(
+                    articleId
+                );
+
+
+            if (localArticle) {
+
+                if (
+                    localArticle.status &&
+                    String(
+                        localArticle.status
+                    ).toLowerCase() !==
+                        "published"
+                ) {
+
+                    showError(
+                        "Article unavailable",
+                        "This article has not been published yet."
+                    );
+
+                    return;
+                }
+
+
+                renderArticle(
+                    localArticle
+                );
+
+            } else {
+
+                showError(
+                    "Article not found",
+                    "This article may have been removed or is not available yet."
+                );
+            }
+        }
+    }
+
+
+    /* =========================================
+       SECURE VIEW COUNTER
+       VIEWS ARE STORED IN SUPABASE
+       BUT NOT DISPLAYED TO READERS
+    ========================================= */
+
+    async function increaseViews(article) {
+
+        if (
+            !article ||
+            !article.id
+        ) {
+            return;
+        }
+
+
+        const viewKey =
+            `viewedArticle_${article.id}`;
+
+
+        if (
+            sessionStorage.getItem(
+                viewKey
+            )
+        ) {
+
+            return;
+        }
+
+
+        sessionStorage.setItem(
+            viewKey,
+            "true"
+        );
+
+
+        if (
+            typeof supabaseClient ===
+                "undefined" ||
+            !supabaseClient
+        ) {
+
+            return;
+        }
+
+
+        try {
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient.rpc(
+                    "increment_article_views",
+                    {
+                        article_id:
+                            article.id
+                    }
+                );
+
+
+            if (error) {
+
+                console.error(
+                    "Could not update article views:",
+                    error
+                );
+
+                return;
+            }
+
+
+            if (
+                typeof data ===
+                    "number"
+            ) {
+
+                article.views =
+                    data;
+
+                /*
+                 * The view count is intentionally
+                 * NOT displayed on the public
+                 * article page.
+                 *
+                 * It remains stored in Supabase
+                 * for the admin dashboard.
+                 */
+            }
+
+        } catch (error) {
+
+            console.error(
+                "View update error:",
+                error
+            );
+        }
+    }
+
+
+    /* =========================================
+       RELATED STORIES
+    ========================================= */
+
+    async function loadRelatedStories(article) {
+
+        const relatedGrid =
+            document.getElementById(
+                "relatedGrid"
+            );
+
+
+        if (!relatedGrid) {
+            return;
+        }
+
+
+        let related = [];
+
+
+        if (
+            typeof supabaseClient !==
+                "undefined" &&
+            supabaseClient
+        ) {
+
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient
+                        .from("articles")
+                        .select("*")
+                        .eq(
+                            "status",
+                            "published"
+                        )
+                        .eq(
+                            "category",
+                            article.category ||
+                                "News"
+                        )
+                        .neq(
+                            "id",
+                            article.id
+                        )
+                        .order(
+                            "id",
+                            {
+                                ascending:
+                                    false
+                            }
+                        )
+                        .limit(3);
+
+
+                if (
+                    !error &&
+                    data
+                ) {
+
+                    related =
+                        data;
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Related stories error:",
+                    error
+                );
+            }
+        }
+
+
+        if (
+            related.length === 0
+        ) {
+
+            const localArticles =
+                getLocalArticles();
+
+
+            related =
+                localArticles
+                    .filter(
+                        item =>
+                            String(
+                                item.id
+                            ) !==
+                            String(
+                                article.id
+                            )
+                    )
+                    .filter(
+                        item =>
+                            !item.status ||
+                            String(
+                                item.status
+                            ).toLowerCase() ===
+                                "published"
+                    )
+                    .filter(
+                        item =>
+                            !article.category ||
+                            item.category ===
+                                article.category
+                    )
+                    .slice(0, 3);
+        }
+
+
+        if (
+            related.length === 0
+        ) {
+
+            relatedGrid.innerHTML = `
+                <p style="color:#6b7280;">
+                    No related stories available.
+                </p>
+            `;
+
+            return;
+        }
+
+
+        relatedGrid.innerHTML =
+            related
+                .map(item => {
+
+                    let imageHTML = "";
+
+
+                    if (
+                        item.image &&
+                        String(
+                            item.image
+                        ).trim() !== ""
+                    ) {
+
+                        imageHTML = `
+                            <img
+                                src="${escapeHTML(
+                                    item.image
+                                )}"
+                                alt="${escapeHTML(
+                                    item.title ||
+                                    "News"
+                                )}"
+                                class="related-card-image"
+                                onerror="this.style.display='none'"
+                            >
+                        `;
+
+                    } else {
+
+                        imageHTML = `
+                            <div class="related-no-image">
+                                DΛMZΞΞ NEWS
+                            </div>
+                        `;
+                    }
+
+
+                    return `
+
+                        <a
+                            href="article.html?id=${encodeURIComponent(
+                                item.id
+                            )}"
+                            class="related-card"
+                        >
+
+                            ${imageHTML}
+
+                            <div class="related-info">
+
+                                <div class="related-category">
+                                    ${escapeHTML(
+                                        item.category ||
+                                        "News"
+                                    )}
+                                </div>
+
+                                <h3>
+                                    ${escapeHTML(
+                                        item.title ||
+                                        "Untitled Article"
+                                    )}
+                                </h3>
+
+                            </div>
+
+                        </a>
+                    `;
+
+                })
+                .join("");
+    }
+
+
+    /* =========================================
+       BREAKING NEWS
+    ========================================= */
+
+    async function loadBreakingNews() {
+
+        let breaking = [];
+
+
+        if (
+            typeof supabaseClient !==
+                "undefined" &&
+            supabaseClient
+        ) {
+
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient
+                        .from("articles")
+                        .select("*")
+                        .eq(
+                            "status",
+                            "published"
+                        )
+                        .eq(
+                            "breaking",
+                            "yes"
+                        )
+                        .order(
+                            "id",
+                            {
+                                ascending:
+                                    false
+                            }
+                        )
+                        .limit(3);
+
+
+                if (
+                    !error &&
+                    data
+                ) {
+
+                    breaking =
+                        data;
+                }
+
+            } catch (error) {
+
+                console.error(
+                    "Breaking news error:",
+                    error
+                );
+            }
+        }
+
+
+        if (
+            breaking.length === 0
+        ) {
+
+            const localArticles =
+                getLocalArticles();
+
+
+            breaking =
+                localArticles
+                    .filter(
+                        item =>
+                            (
+                                !item.status ||
+                                String(
+                                    item.status
+                                ).toLowerCase() ===
+                                    "published"
+                            ) &&
+                            (
+                                item.breaking ===
+                                    true ||
+                                item.breaking ===
+                                    "yes" ||
+                                item.breaking ===
+                                    "true"
+                            )
+                    )
+                    .slice(0, 3);
+        }
+
+
+        if (
+            breaking.length === 0
+        ) {
+
+            breakingContent.textContent =
+                "Welcome to DΛMZΞΞ NEWS — bringing you the latest stories.";
+
+            return;
+        }
+
+
+        breakingContent.textContent =
+            breaking
+                .map(
+                    item =>
+                        item.title
+                )
+                .join(
+                    "   •   "
+                );
+    }
+
+
+    /* =========================================
+       SHARE BUTTONS
+    ========================================= */
+
+    function setupSharing() {
+
+        const url =
+            window.location.href;
+
+        const title =
+            currentArticle?.title ||
+            "DΛMZΞΞ NEWS";
+
+
+        const facebook =
+            document.getElementById(
+                "facebookShare"
+            );
+
+        const twitter =
+            document.getElementById(
+                "twitterShare"
+            );
+
+        const whatsapp =
+            document.getElementById(
+                "whatsappShare"
+            );
+
+        const copy =
+            document.getElementById(
+                "copyLink"
+            );
+
+
+        if (facebook) {
+
+            facebook.addEventListener(
+                "click",
+                () => {
+
+                    window.open(
+                        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                            url
+                        )}`,
+                        "_blank",
+                        "width=700,height=500"
+                    );
+
+                }
+            );
+        }
+
+
+        if (twitter) {
+
+            twitter.addEventListener(
+                "click",
+                () => {
+
+                    window.open(
+                        `https://twitter.com/intent/tweet?text=${encodeURIComponent(
+                            title
+                        )}&url=${encodeURIComponent(
+                            url
+                        )}`,
+                        "_blank",
+                        "width=700,height=500"
+                    );
+
+                }
+            );
+        }
+
+
+        if (whatsapp) {
+
+            whatsapp.addEventListener(
+                "click",
+                () => {
+
+                    window.open(
+                        `https://wa.me/?text=${encodeURIComponent(
+                            title +
+                            " " +
+                            url
+                        )}`,
+                        "_blank"
+                    );
+
+                }
+            );
+        }
+
+
+        if (copy) {
+
+            copy.addEventListener(
+                "click",
+                async () => {
+
+                    try {
+
+                        await navigator.clipboard.writeText(
+                            url
+                        );
+
+                        copy.textContent =
+                            "Copied!";
+
+
+                        setTimeout(
+                            () => {
+
+                                copy.textContent =
+                                    "Copy Link";
+
+                            },
+                            1800
+                        );
+
+                    } catch (error) {
+
+                        alert(
+                            "Unable to copy link. Please copy the URL manually."
+                        );
+                    }
+                }
+            );
+        }
+    }
+
+
+    /* =========================================
+       ERROR
+    ========================================= */
+
+    function showError(
+        title,
+        message
+    ) {
+
+        articleContainer.innerHTML = `
+
+            <div class="message-box">
+
+                <h2>
+                    ${escapeHTML(
+                        title
+                    )}
+                </h2>
+
+                <p>
+                    ${escapeHTML(
+                        message
+                    )}
+                </p>
+
+                <a
+                    href="index.html"
+                    class="home-btn"
+                >
+                    Back to Home
+                </a>
+
+            </div>
+        `;
+    }
+
+
+    /* =========================================
+       SEARCH
+    ========================================= */
+
+    if (
+        searchForm &&
+        searchInput
+    ) {
+
+        searchForm.addEventListener(
+            "submit",
+            event => {
+
+                event.preventDefault();
+
+                const query =
+                    searchInput.value.trim();
+
+
+                if (!query) {
+                    return;
+                }
+
+
+                window.location.href =
+                    `search.html?q=${encodeURIComponent(
+                        query
+                    )}`;
+            }
+        );
+    }
+
+
+    /* =========================================
+       START
+    ========================================= */
+
+    loadBreakingNews();
+
+    loadArticle();
+
+});
+
+</script>
+
+</body>
+</html>
