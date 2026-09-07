@@ -1,4 +1,3 @@
-
 const SUPABASE_URL =
     "https://qbubumpambnuvjeopttm.supabase.co";
 
@@ -12,8 +11,8 @@ const supabaseClient =
         SUPABASE_KEY,
         {
             auth: {
-                persistSession: false,
-                autoRefreshToken: false,
+                persistSession: true,
+                autoRefreshToken: true,
                 detectSessionInUrl: false
             }
         }
@@ -23,4 +22,3 @@ const supabaseClient =
 console.log(
     "DΛMZΞΞ NEWS: Supabase client loaded."
 );
-
