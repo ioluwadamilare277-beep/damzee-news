@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -15,7 +15,9 @@
 
 <style>
 
-/* Prevent dashboard from flashing before authentication is checked */
+/* =========================================
+   ADMIN LOADING
+========================================= */
 
 body.admin-loading .admin-sidebar,
 body.admin-loading .admin-main {
@@ -26,7 +28,10 @@ body.admin-loading {
     background: #111111;
 }
 
-/* Logout button */
+
+/* =========================================
+   LOGOUT BUTTON
+========================================= */
 
 .logout-button {
     border: 1px solid #d7dce5;
@@ -50,7 +55,10 @@ body.admin-loading {
     cursor: not-allowed;
 }
 
-/* Newsletter subscriber summary */
+
+/* =========================================
+   NEWSLETTER SUBSCRIBERS
+========================================= */
 
 .subscriber-summary {
     min-width: 120px;
@@ -89,11 +97,128 @@ body.admin-loading {
     border-radius: 10px;
 }
 
+
+/* =========================================
+   IMAGE UPLOAD
+========================================= */
+
+.image-upload-box {
+    width: 100%;
+    position: relative;
+}
+
+.image-upload-box input[type="file"] {
+    display: none;
+}
+
+.image-upload-label {
+    width: 100%;
+    min-height: 180px;
+    border: 2px dashed #d7dce5;
+    border-radius: 12px;
+    background: #f8fafc;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+    padding: 30px;
+    box-sizing: border-box;
+}
+
+.image-upload-label:hover {
+    border-color: #111111;
+    background: #f1f5f9;
+}
+
+.upload-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.image-upload-label strong {
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+.image-upload-label span {
+    font-size: 12px;
+    color: #6b7280;
+}
+
+
+/* =========================================
+   IMAGE PREVIEW
+========================================= */
+
+.image-preview-container {
+    margin-top: 15px;
+    width: 100%;
+}
+
+.image-preview-container img {
+    display: block;
+
+    width: 100%;
+    max-height: 350px;
+
+    object-fit: cover;
+
+    border-radius: 12px;
+
+    border: 1px solid #e5e7eb;
+}
+
+.remove-image-button {
+    margin-top: 10px;
+
+    border: 1px solid #dc2626;
+
+    background: #ffffff;
+
+    color: #dc2626;
+
+    padding: 8px 14px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.remove-image-button:hover {
+    background: #fff1f2;
+}
+
+
+/* =========================================
+   IMAGE STATUS
+========================================= */
+
+#imageUploadStatus {
+    display: block;
+    margin-top: 8px;
+    color: #6b7280;
+}
+
 </style>
 
 </head>
 
+
 <body class="admin-loading">
+
 
 <!-- =========================================
      ADMIN SIDEBAR
@@ -101,87 +226,86 @@ body.admin-loading {
 
 <aside class="admin-sidebar" id="adminSidebar">
 
+    <div class="admin-brand">
 
-<div class="admin-brand">
+        <div class="brand-mark">
+            D
+        </div>
 
-    <div class="brand-mark">
-        D
-    </div>
+        <div class="brand-text">
 
-    <div class="brand-text">
+            <h1>
+                DΛMZΞΞ
+            </h1>
 
-        <h1>
-            DΛMZΞΞ
-        </h1>
-
-        <span>
-            NEWS ADMIN
-        </span>
-
-    </div>
-
-</div>
-
-
-<nav class="admin-nav">
-
-    <a href="index.html" class="active">
-        <span class="nav-icon">▦</span>
-        <span>Dashboard</span>
-    </a>
-
-    <a href="#new-article">
-        <span class="nav-icon">＋</span>
-        <span>New Article</span>
-    </a>
-
-    <a href="#articles">
-        <span class="nav-icon">▤</span>
-        <span>Articles</span>
-    </a>
-
-    <a href="#newsletter">
-        <span class="nav-icon">✉</span>
-        <span>Newsletter</span>
-    </a>
-
-    <a href="#analytics">
-        <span class="nav-icon">◫</span>
-        <span>Analytics</span>
-    </a>
-
-    <a href="#activity">
-        <span class="nav-icon">◷</span>
-        <span>Activity</span>
-    </a>
-
-</nav>
-
-
-<div class="sidebar-footer">
-
-    <div class="system-status">
-
-        <span class="status-dot"></span>
-
-        <div>
-
-            <strong id="systemStatus">
-                Online
-            </strong>
-
-            <small id="lastActive">
-                Last active: --
-            </small>
+            <span>
+                NEWS ADMIN
+            </span>
 
         </div>
 
     </div>
 
-</div>
 
+    <nav class="admin-nav">
+
+        <a href="index.html" class="active">
+            <span class="nav-icon">▦</span>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="#new-article">
+            <span class="nav-icon">＋</span>
+            <span>New Article</span>
+        </a>
+
+        <a href="#articles">
+            <span class="nav-icon">▤</span>
+            <span>Articles</span>
+        </a>
+
+        <a href="#newsletter">
+            <span class="nav-icon">✉</span>
+            <span>Newsletter</span>
+        </a>
+
+        <a href="#analytics">
+            <span class="nav-icon">◫</span>
+            <span>Analytics</span>
+        </a>
+
+        <a href="#activity">
+            <span class="nav-icon">◷</span>
+            <span>Activity</span>
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-footer">
+
+        <div class="system-status">
+
+            <span class="status-dot"></span>
+
+            <div>
+
+                <strong id="systemStatus">
+                    Online
+                </strong>
+
+                <small id="lastActive">
+                    Last active: --
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </aside>
+
 
 
 <!-- =========================================
@@ -197,135 +321,133 @@ body.admin-loading {
 
 <header class="admin-topbar">
 
-
-<button
-    type="button"
-    class="mobile-menu"
-    id="mobileMenu"
-    aria-label="Open admin menu"
->
-    ☰
-</button>
-
-
-<div class="topbar-title">
-
-    <span>
-        ADMINISTRATION
-    </span>
-
-    <h2>
-        Dashboard
-    </h2>
-
-</div>
+    <button
+        type="button"
+        class="mobile-menu"
+        id="mobileMenu"
+        aria-label="Open admin menu"
+    >
+        ☰
+    </button>
 
 
-<div class="topbar-actions">
+    <div class="topbar-title">
+
+        <span>
+            ADMINISTRATION
+        </span>
+
+        <h2>
+            Dashboard
+        </h2>
+
+    </div>
 
 
-    <!-- NOTIFICATIONS -->
+    <div class="topbar-actions">
 
-    <div class="notification-wrapper">
 
-        <button
-            type="button"
-            class="notification-button"
-            id="notificationButton"
-            aria-label="Notifications"
-        >
+        <!-- NOTIFICATIONS -->
 
-            🔔
+        <div class="notification-wrapper">
 
-            <span
-                class="notification-badge hidden"
-                id="notificationBadge"
+            <button
+                type="button"
+                class="notification-button"
+                id="notificationButton"
+                aria-label="Notifications"
             >
-                0
-            </span>
 
-        </button>
+                🔔
+
+                <span
+                    class="notification-badge hidden"
+                    id="notificationBadge"
+                >
+                    0
+                </span>
+
+            </button>
 
 
-        <div
-            class="notification-panel"
-            id="notificationPanel"
-        >
+            <div
+                class="notification-panel"
+                id="notificationPanel"
+            >
 
-            <div class="notification-header">
+                <div class="notification-header">
 
-                <div>
+                    <div>
 
-                    <strong>
-                        Notifications
-                    </strong>
+                        <strong>
+                            Notifications
+                        </strong>
 
-                    <span id="notificationCount">
-                        No new notifications
-                    </span>
+                        <span id="notificationCount">
+                            No new notifications
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="markNotificationsRead"
+                    >
+                        Mark all read
+                    </button>
 
                 </div>
 
 
-                <button
-                    type="button"
-                    id="markNotificationsRead"
+                <div
+                    class="notification-list"
+                    id="notificationList"
                 >
-                    Mark all read
-                </button>
+                </div>
 
             </div>
 
+        </div>
 
-            <div
-                class="notification-list"
-                id="notificationList"
-            >
+
+        <!-- ADMIN USER -->
+
+        <div class="admin-user">
+
+            <div class="admin-avatar">
+                D
+            </div>
+
+            <div class="admin-user-info">
+
+                <strong>
+                    Administrator
+                </strong>
+
+                <small>
+                    DΛMZΞΞ NEWS
+                </small>
+
             </div>
 
         </div>
 
-    </div>
 
+        <!-- LOGOUT -->
 
-    <!-- ADMIN USER -->
-
-    <div class="admin-user">
-
-        <div class="admin-avatar">
-            D
-        </div>
-
-        <div class="admin-user-info">
-
-            <strong>
-                Administrator
-            </strong>
-
-            <small>
-                DΛMZΞΞ NEWS
-            </small>
-
-        </div>
+        <button
+            type="button"
+            id="logoutButton"
+            class="logout-button"
+        >
+            Logout
+        </button>
 
     </div>
-
-
-    <!-- LOGOUT -->
-
-    <button
-        type="button"
-        id="logoutButton"
-        class="logout-button"
-    >
-        Logout
-    </button>
-
-
-</div>
-
 
 </header>
+
 
 
 <!-- =========================================
@@ -370,6 +492,7 @@ body.admin-loading {
 </section>
 
 
+
 <!-- =========================================
      STATISTICS
 ========================================= -->
@@ -407,6 +530,7 @@ body.admin-loading {
     </div>
 
 
+
     <!-- PUBLISHED -->
 
     <div class="stat-card">
@@ -432,6 +556,7 @@ body.admin-loading {
         </small>
 
     </div>
+
 
 
     <!-- VIEWS -->
@@ -461,6 +586,7 @@ body.admin-loading {
     </div>
 
 
+
     <!-- SYSTEM -->
 
     <div class="stat-card">
@@ -487,12 +613,12 @@ body.admin-loading {
 
     </div>
 
-
 </section>
 
 
+
 <!-- =========================================
-     NEWSLETTER SUBSCRIBERS
+     NEWSLETTER
 ========================================= -->
 
 <section
@@ -552,6 +678,7 @@ body.admin-loading {
 </section>
 
 
+
 <!-- =========================================
      CREATE ARTICLE
 ========================================= -->
@@ -582,6 +709,7 @@ body.admin-loading {
     </div>
 
 
+
     <form id="articleForm">
 
 
@@ -605,6 +733,7 @@ body.admin-loading {
                 >
 
             </div>
+
 
 
             <!-- CATEGORY -->
@@ -669,6 +798,7 @@ body.admin-loading {
             </div>
 
 
+
             <!-- AUTHOR -->
 
             <div class="form-group">
@@ -686,6 +816,7 @@ body.admin-loading {
                 >
 
             </div>
+
 
 
             <!-- STATUS -->
@@ -714,6 +845,7 @@ body.admin-loading {
             </div>
 
 
+
             <!-- BREAKING -->
 
             <div class="form-group">
@@ -740,26 +872,89 @@ body.admin-loading {
             </div>
 
 
-            <!-- IMAGE -->
+
+            <!-- =========================================
+                 DIRECT IMAGE UPLOAD
+            ========================================= -->
 
             <div class="form-group full-width">
 
-                <label for="articleImage">
-                    Article Image URL
+                <label>
+                    Article Image
                 </label>
 
-                <input
-                    type="url"
-                    id="articleImage"
-                    name="image"
-                    placeholder="https://example.com/image.jpg"
+
+                <div class="image-upload-box">
+
+                    <input
+                        type="file"
+                        id="articleImageFile"
+                        name="imageFile"
+                        accept="image/jpeg,image/png,image/webp"
+                    >
+
+
+                    <label
+                        for="articleImageFile"
+                        class="image-upload-label"
+                    >
+
+                        <div class="upload-icon">
+                            📷
+                        </div>
+
+                        <strong>
+                            Choose Article Image
+                        </strong>
+
+                        <span>
+                            JPG, PNG or WebP
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- IMAGE PREVIEW -->
+
+                <div
+                    id="imagePreviewContainer"
+                    class="image-preview-container"
+                    style="display:none;"
                 >
 
-                <small class="form-help">
-                    Paste the direct URL of the article image.
+                    <img
+                        id="imagePreview"
+                        src=""
+                        alt="Article image preview"
+                    >
+
+
+                    <button
+                        type="button"
+                        id="removeImage"
+                        class="remove-image-button"
+                    >
+                        Remove Image
+                    </button>
+
+                </div>
+
+
+
+                <!-- IMAGE STATUS -->
+
+                <small
+                    class="form-help"
+                    id="imageUploadStatus"
+                >
+                    Select an image to upload.
                 </small>
 
             </div>
+
 
 
             <!-- SUMMARY -->
@@ -778,6 +973,7 @@ body.admin-loading {
                 ></textarea>
 
             </div>
+
 
 
             <!-- CONTENT -->
@@ -799,6 +995,7 @@ body.admin-loading {
 
 
         </div>
+
 
 
         <!-- FORM ACTIONS -->
@@ -826,6 +1023,7 @@ body.admin-loading {
     </form>
 
 </section>
+
 
 
 <!-- =========================================
@@ -858,6 +1056,7 @@ body.admin-loading {
     </div>
 
 
+
     <!-- ARTICLE CONTROLS -->
 
     <div class="article-controls">
@@ -877,6 +1076,7 @@ body.admin-loading {
             >
 
         </div>
+
 
 
         <select id="articleFilter">
@@ -928,6 +1128,7 @@ body.admin-loading {
         </select>
 
 
+
         <select id="articleStatusFilter">
 
             <option value="all">
@@ -948,7 +1149,8 @@ body.admin-loading {
     </div>
 
 
-    <!-- ARTICLES INSERTED BY JAVASCRIPT -->
+
+    <!-- ARTICLES -->
 
     <div
         class="articles-list"
@@ -957,6 +1159,7 @@ body.admin-loading {
     </div>
 
 </section>
+
 
 
 <!-- =========================================
@@ -1003,6 +1206,7 @@ body.admin-loading {
     </div>
 
 
+
     <!-- CATEGORY PERFORMANCE -->
 
     <div class="admin-panel analytics-panel">
@@ -1036,8 +1240,8 @@ body.admin-loading {
 
     </div>
 
-
 </section>
+
 
 
 <!-- =========================================
@@ -1082,30 +1286,30 @@ body.admin-loading {
 </div>
 
 
+
 <!-- =========================================
      ADMIN FOOTER
 ========================================= -->
 
 <footer class="admin-footer">
 
+    <strong>
+        DΛMZΞΞ NEWS
+    </strong>
 
-<strong>
-    DΛMZΞΞ NEWS
-</strong>
+    <span>
+        Admin Dashboard
+    </span>
 
-<span>
-    Admin Dashboard
-</span>
-
-<span>
-    © 2026 DΛMZΞΞ NEWS
-</span>
-
+    <span>
+        © 2026 DΛMZΞΞ NEWS
+    </span>
 
 </footer>
 
 
 </main>
+
 
 
 <!-- =========================================
@@ -1115,6 +1319,7 @@ body.admin-loading {
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script src="../supabase.js"></script>
+
 
 
 <!-- =========================================
@@ -1266,6 +1471,7 @@ body.admin-loading {
 })();
 
 </script>
+
 
 
 <!-- =========================================
