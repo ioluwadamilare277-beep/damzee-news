@@ -109,6 +109,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let existingArticleImage = "";
 
+    let previewObjectUrl = null;
+
 
     /* =========================================
        SUPABASE CHECK
@@ -221,7 +223,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const articleUrl =
             getArticleUrl(articleId);
 
-
         const originalText =
             button.textContent;
 
@@ -303,10 +304,334 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
+       PERMANENT IMAGE WATERMARK
+    ========================================= */
+
+    async function createWatermarkedImage(file) {
+
+        return new Promise((resolve, reject) => {
+
+            if (!file) {
+                reject(
+                    new Error("No image selected.")
+                );
+
+                return;
+            }
+
+
+            const image =
+                new Image();
+
+            const objectUrl =
+                URL.createObjectURL(file);
+
+
+            image.onload = () => {
+
+                try {
+
+                    URL.revokeObjectURL(
+                        objectUrl
+                    );
+
+
+                    const canvas =
+                        document.createElement(
+                            "canvas"
+                        );
+
+
+                    const context =
+                        canvas.getContext(
+                            "2d"
+                        );
+
+
+                    if (!context) {
+
+                        reject(
+                            new Error(
+                                "Your browser could not prepare the image."
+                            )
+                        );
+
+                        return;
+                    }
+
+
+                    /*
+                     * Keep the original image dimensions.
+                     */
+
+                    canvas.width =
+                        image.naturalWidth;
+
+                    canvas.height =
+                        image.naturalHeight;
+
+
+                    /*
+                     * Draw original image.
+                     */
+
+                    context.drawImage(
+                        image,
+                        0,
+                        0,
+                        canvas.width,
+                        canvas.height
+                    );
+
+
+                    /*
+                     * Responsive watermark sizing.
+                     */
+
+                    const width =
+                        canvas.width;
+
+                    const height =
+                        canvas.height;
+
+
+                    const watermarkSize =
+                        Math.max(
+                            14,
+                            Math.round(
+                                Math.min(
+                                    width,
+                                    height
+                                ) * 0.025
+                            )
+                        );
+
+
+                    const horizontalPadding =
+                        Math.max(
+                            10,
+                            Math.round(
+                                watermarkSize * 0.7
+                            )
+                        );
+
+
+                    const verticalPadding =
+                        Math.max(
+                            8,
+                            Math.round(
+                                watermarkSize * 0.5
+                            )
+                        );
+
+
+                    const right =
+                        Math.max(
+                            15,
+                            Math.round(
+                                width * 0.018
+                            )
+                        );
+
+
+                    const bottom =
+                        Math.max(
+                            15,
+                            Math.round(
+                                height * 0.018
+                            )
+                        );
+
+
+                    /*
+                     * Watermark text.
+                     */
+
+                    const watermarkText =
+                        "DΛMZΞΞ NEWS";
+
+
+                    context.font =
+                        "900 " +
+                        watermarkSize +
+                        "px Arial, Helvetica, sans-serif";
+
+
+                    context.textBaseline =
+                        "middle";
+
+
+                    const textWidth =
+                        context.measureText(
+                            watermarkText
+                        ).width;
+
+
+                    const boxWidth =
+                        textWidth +
+                        horizontalPadding * 2;
+
+
+                    const boxHeight =
+                        watermarkSize +
+                        verticalPadding * 2;
+
+
+                    const boxX =
+                        width -
+                        right -
+                        boxWidth;
+
+
+                    const boxY =
+                        height -
+                        bottom -
+                        boxHeight;
+
+
+                    /*
+                     * Dark watermark background.
+                     */
+
+                    context.fillStyle =
+                        "rgba(0, 0, 0, 0.58)";
+
+
+                    context.fillRect(
+                        boxX,
+                        boxY,
+                        boxWidth,
+                        boxHeight
+                    );
+
+
+                    /*
+                     * White watermark text.
+                     */
+
+                    context.fillStyle =
+                        "rgba(255, 255, 255, 0.96)";
+
+
+                    context.letterSpacing =
+                        "1px";
+
+
+                    context.fillText(
+                        watermarkText,
+                        boxX +
+                            horizontalPadding,
+                        boxY +
+                            boxHeight / 2
+                    );
+
+
+                    /*
+                     * Convert canvas to JPEG.
+                     *
+                     * JPEG makes the final uploaded
+                     * image consistent and ensures
+                     * the watermark is permanently
+                     * embedded in the file.
+                     */
+
+                    canvas.toBlob(
+                        blob => {
+
+                            if (!blob) {
+
+                                reject(
+                                    new Error(
+                                        "Unable to create the watermarked image."
+                                    )
+                                );
+
+                                return;
+                            }
+
+
+                            const originalName =
+                                file.name
+                                    .replace(
+                                        /\.[^/.]+$/,
+                                        ""
+                                    );
+
+
+                            const watermarkedFile =
+                                new File(
+                                    [
+                                        blob
+                                    ],
+                                    originalName +
+                                        "-damzee.jpg",
+                                    {
+                                        type:
+                                            "image/jpeg",
+                                        lastModified:
+                                            Date.now()
+                                    }
+                                );
+
+
+                            resolve(
+                                watermarkedFile
+                            );
+
+                        },
+                        "image/jpeg",
+                        0.92
+                    );
+
+                }
+
+                catch (error) {
+
+                    URL.revokeObjectURL(
+                        objectUrl
+                    );
+
+                    reject(error);
+                }
+            };
+
+
+            image.onerror = () => {
+
+                URL.revokeObjectURL(
+                    objectUrl
+                );
+
+                reject(
+                    new Error(
+                        "Unable to read the selected image."
+                    )
+                );
+            };
+
+
+            image.src =
+                objectUrl;
+        });
+    }
+
+
+    /* =========================================
        IMAGE PREVIEW
     ========================================= */
 
     function clearImageSelection() {
+
+        if (previewObjectUrl) {
+
+            URL.revokeObjectURL(
+                previewObjectUrl
+            );
+
+            previewObjectUrl =
+                null;
+        }
+
 
         if (articleImageFile) {
             articleImageFile.value = "";
@@ -334,10 +659,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    function showImagePreview(file) {
+    async function showImagePreview(file) {
 
         if (!file) {
-            return;
+            return false;
         }
 
 
@@ -372,36 +697,80 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        const objectUrl =
-            URL.createObjectURL(file);
+        try {
+
+            if (imageUploadStatus) {
+
+                imageUploadStatus.textContent =
+                    "Adding DΛMZΞΞ NEWS watermark...";
+            }
 
 
-        if (imagePreview) {
+            const watermarkedFile =
+                await createWatermarkedImage(
+                    file
+                );
 
-            imagePreview.src =
-                objectUrl;
+
+            if (previewObjectUrl) {
+
+                URL.revokeObjectURL(
+                    previewObjectUrl
+                );
+            }
+
+
+            previewObjectUrl =
+                URL.createObjectURL(
+                    watermarkedFile
+                );
+
+
+            if (imagePreview) {
+
+                imagePreview.src =
+                    previewObjectUrl;
+            }
+
+
+            if (imagePreviewContainer) {
+
+                imagePreviewContainer.style.display =
+                    "block";
+            }
+
+
+            if (imageUploadStatus) {
+
+                imageUploadStatus.textContent =
+                    "Watermark added: " +
+                    file.name +
+                    " → ready to upload.";
+            }
+
+
+            return true;
+
         }
 
+        catch (error) {
 
-        if (imagePreviewContainer) {
+            console.error(
+                "DΛMZΞΞ NEWS: Watermark creation failed.",
+                error
+            );
 
-            imagePreviewContainer.style.display =
-                "block";
+
+            alert(
+                "Unable to add the DΛMZΞΞ NEWS watermark.\n\n" +
+                error.message
+            );
+
+
+            clearImageSelection();
+
+            return false;
         }
-
-
-        if (imageUploadStatus) {
-
-            imageUploadStatus.textContent =
-                "Selected: " +
-                file.name +
-                " (" +
-                formatFileSize(file.size) +
-                ")";
-        }
-
-
-        return true;
     }
 
 
@@ -435,7 +804,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         articleImageFile.addEventListener(
             "change",
-            () => {
+            async () => {
 
                 const file =
                     articleImageFile.files &&
@@ -445,7 +814,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                showImagePreview(file);
+                await showImagePreview(
+                    file
+                );
             }
         );
     }
@@ -503,16 +874,42 @@ document.addEventListener("DOMContentLoaded", () => {
         if (file.size > MAX_IMAGE_SIZE) {
 
             throw new Error(
-                "Image is too large. Maximum size is 5 MB."
+                "Image is too large. Maximum allowed size is 5 MB."
             );
         }
 
 
-        const extension =
-            file.name
-                .split(".")
-                .pop()
-                .toLowerCase();
+        if (imageUploadStatus) {
+
+            imageUploadStatus.textContent =
+                "Adding DΛMZΞΞ NEWS watermark...";
+        }
+
+
+        /*
+         * Permanently add the watermark.
+         */
+
+        const watermarkedFile =
+            await createWatermarkedImage(
+                file
+            );
+
+
+        /*
+         * The watermark process converts the
+         * image to JPEG. Check final size too.
+         */
+
+        if (
+            watermarkedFile.size >
+            MAX_IMAGE_SIZE
+        ) {
+
+            throw new Error(
+                "The watermarked image is larger than 5 MB. Please choose a smaller image."
+            );
+        }
 
 
         const uniqueName =
@@ -522,8 +919,7 @@ document.addEventListener("DOMContentLoaded", () => {
             Math.random()
                 .toString(36)
                 .substring(2, 10) +
-            "." +
-            extension;
+            ".jpg";
 
 
         const filePath =
@@ -534,7 +930,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (imageUploadStatus) {
 
             imageUploadStatus.textContent =
-                "Uploading image...";
+                "Uploading watermarked image...";
         }
 
 
@@ -545,11 +941,11 @@ document.addEventListener("DOMContentLoaded", () => {
             .from(IMAGE_BUCKET)
             .upload(
                 filePath,
-                file,
+                watermarkedFile,
                 {
                     cacheControl: "3600",
                     upsert: false,
-                    contentType: file.type
+                    contentType: "image/jpeg"
                 }
             );
 
@@ -593,7 +989,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (imageUploadStatus) {
 
             imageUploadStatus.textContent =
-                "Image uploaded successfully.";
+                "Watermarked image uploaded successfully.";
         }
 
 
@@ -3003,7 +3399,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     submitButton.textContent =
                         selectedImage
-                            ? "Uploading image..."
+                            ? "Preparing image..."
                             : "Saving...";
                 }
 
@@ -4050,4 +4446,3 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 });
-
