@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -203,10 +204,45 @@
             font-size: 13px;
         }
 
+        /* =========================
+           MAIN ARTICLE IMAGE
+        ========================= */
+
+        .article-image-wrapper {
+            position: relative;
+            width: 100%;
+            max-height: 520px;
+            overflow: hidden;
+            background: #e5e7eb;
+        }
+
         .article-image {
             width: 100%;
             max-height: 520px;
             object-fit: cover;
+        }
+
+        .article-image-watermark {
+            position: absolute;
+            right: 16px;
+            bottom: 14px;
+            z-index: 20;
+
+            padding: 6px 10px;
+
+            background: rgba(0, 0, 0, 0.58);
+            color: rgba(255, 255, 255, 0.94);
+
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            line-height: 1;
+
+            border-radius: 3px;
+
+            pointer-events: none;
+            user-select: none;
         }
 
         .no-image {
@@ -221,6 +257,10 @@
             font-weight: 800;
             letter-spacing: 1px;
         }
+
+        /* =========================
+           ARTICLE CONTENT
+        ========================= */
 
         .article-content {
             padding: 35px 40px 45px;
@@ -603,6 +643,13 @@
             .news-section {
                 width: 92%;
             }
+
+            .article-image-watermark {
+                right: 12px;
+                bottom: 10px;
+                font-size: 11px;
+                padding: 5px 8px;
+            }
         }
 
         @media (max-width: 600px) {
@@ -652,6 +699,13 @@
 
             .section-heading h2 {
                 font-size: 21px;
+            }
+
+            .article-image-watermark {
+                right: 9px;
+                bottom: 8px;
+                font-size: 10px;
+                padding: 5px 7px;
             }
         }
     </style>
@@ -723,10 +777,7 @@
         <span>DΛMZΞΞ NEWS</span>
     </div>
 
-    <div
-        class="news-grid"
-        id="latestNewsGrid"
-    >
+    <div class="news-grid" id="latestNewsGrid">
         <div class="news-loading">
             Loading latest news...
         </div>
@@ -743,10 +794,7 @@
         <span>MORE STORIES</span>
     </div>
 
-    <div
-        class="news-grid"
-        id="categoryNewsGrid"
-    >
+    <div class="news-grid" id="categoryNewsGrid">
         <div class="news-loading">
             Loading more stories...
         </div>
@@ -776,27 +824,15 @@
 
                 <div class="footer-social">
 
-                    <a
-                        href="https://t.me/damzeenews"
-                        target="_blank"
-                        rel="noopener"
-                    >
+                    <a href="https://t.me/damzeenews" target="_blank" rel="noopener">
                         Telegram
                     </a>
 
-                    <a
-                        href="https://whatsapp.com/channel/0029VbDhaGj7YSd6MFcIZP1M"
-                        target="_blank"
-                        rel="noopener"
-                    >
+                    <a href="https://whatsapp.com/channel/0029VbDhaGj7YSd6MFcIZP1M" target="_blank" rel="noopener">
                         WhatsApp
                     </a>
 
-                    <a
-                        href="https://x.com/DAMZEENEWS"
-                        target="_blank"
-                        rel="noopener"
-                    >
+                    <a href="https://x.com/DAMZEENEWS" target="_blank" rel="noopener">
                         X
                     </a>
 
@@ -808,25 +844,11 @@
 
                 <h3>News</h3>
 
-                <a href="index.html">
-                    Latest News
-                </a>
-
-                <a href="category.html?category=Nigeria">
-                    Nigeria
-                </a>
-
-                <a href="category.html?category=World">
-                    World
-                </a>
-
-                <a href="category.html?category=Politics">
-                    Politics
-                </a>
-
-                <a href="category.html?category=Business">
-                    Business
-                </a>
+                <a href="index.html">Latest News</a>
+                <a href="category.html?category=Nigeria">Nigeria</a>
+                <a href="category.html?category=World">World</a>
+                <a href="category.html?category=Politics">Politics</a>
+                <a href="category.html?category=Business">Business</a>
 
             </div>
 
@@ -834,29 +856,12 @@
 
                 <h3>Categories</h3>
 
-                <a href="category.html?category=Sports">
-                    Sports
-                </a>
-
-                <a href="category.html?category=Entertainment">
-                    Entertainment
-                </a>
-
-                <a href="category.html?category=Technology">
-                    Technology
-                </a>
-
-                <a href="category.html?category=Science">
-                    Science
-                </a>
-
-                <a href="category.html?category=Health">
-                    Health
-                </a>
-
-                <a href="category.html?category=Lifestyle">
-                    Lifestyle
-                </a>
+                <a href="category.html?category=Sports">Sports</a>
+                <a href="category.html?category=Entertainment">Entertainment</a>
+                <a href="category.html?category=Technology">Technology</a>
+                <a href="category.html?category=Science">Science</a>
+                <a href="category.html?category=Health">Health</a>
+                <a href="category.html?category=Lifestyle">Lifestyle</a>
 
             </div>
 
@@ -864,25 +869,11 @@
 
                 <h3>Information</h3>
 
-                <a href="index.html">
-                    About DAMZEE
-                </a>
-
-                <a href="index.html">
-                    Contact
-                </a>
-
-                <a href="index.html">
-                    Advertise
-                </a>
-
-                <a href="index.html">
-                    Privacy Policy
-                </a>
-
-                <a href="index.html">
-                    Terms
-                </a>
+                <a href="index.html">About DAMZEE</a>
+                <a href="index.html">Contact</a>
+                <a href="index.html">Advertise</a>
+                <a href="index.html">Privacy Policy</a>
+                <a href="index.html">Terms</a>
 
             </div>
 
@@ -896,10 +887,7 @@
                 All Rights Reserved.
             </div>
 
-            <div
-                class="back-top"
-                id="backTop"
-            >
+            <div class="back-top" id="backTop">
                 ↑ Back to Top
             </div>
 
@@ -910,7 +898,6 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script src="supabase.js"></script>
 
 <script>
@@ -1067,16 +1054,24 @@ document.addEventListener("DOMContentLoaded", () => {
         ) {
 
             imageHTML = `
-                <img
-                    src="${escapeHTML(
-                        article.image
-                    )}"
-                    alt="${escapeHTML(
-                        title
-                    )}"
-                    class="article-image"
-                    onerror="this.style.display='none'"
-                >
+                <div class="article-image-wrapper">
+
+                    <img
+                        src="${escapeHTML(
+                            article.image
+                        )}"
+                        alt="${escapeHTML(
+                            title
+                        )}"
+                        class="article-image"
+                        onerror="this.style.display='none'"
+                    >
+
+                    <span class="article-image-watermark">
+                        DΛMZΞΞ NEWS
+                    </span>
+
+                </div>
             `;
 
         } else {
@@ -1530,22 +1525,52 @@ document.addEventListener("DOMContentLoaded", () => {
                     ) {
 
                         imageHTML = `
-                            <img
-                                src="${escapeHTML(
-                                    item.image
-                                )}"
-                                alt="${escapeHTML(
-                                    item.title ||
-                                    "News"
-                                )}"
-                                style="
-                                    width:100%;
-                                    height:130px;
-                                    object-fit:cover;
-                                    background:#e5e7eb;
-                                "
-                                onerror="this.style.display='none'"
-                            >
+                            <div style="
+                                position:relative;
+                                width:100%;
+                                height:130px;
+                                overflow:hidden;
+                                background:#e5e7eb;
+                            ">
+
+                                <img
+                                    src="${escapeHTML(
+                                        item.image
+                                    )}"
+                                    alt="${escapeHTML(
+                                        item.title ||
+                                        "News"
+                                    )}"
+                                    style="
+                                        width:100%;
+                                        height:130px;
+                                        object-fit:cover;
+                                        background:#e5e7eb;
+                                    "
+                                    onerror="this.style.display='none'"
+                                >
+
+                                <span style="
+                                    position:absolute;
+                                    right:8px;
+                                    bottom:8px;
+                                    z-index:10;
+                                    padding:4px 6px;
+                                    background:rgba(0,0,0,.58);
+                                    color:rgba(255,255,255,.94);
+                                    font-family:Arial,Helvetica,sans-serif;
+                                    font-size:9px;
+                                    font-weight:900;
+                                    letter-spacing:.7px;
+                                    line-height:1;
+                                    border-radius:2px;
+                                    pointer-events:none;
+                                    user-select:none;
+                                ">
+                                    DΛMZΞΞ NEWS
+                                </span>
+
+                            </div>
                         `;
 
                     } else {
@@ -1658,15 +1683,45 @@ document.addEventListener("DOMContentLoaded", () => {
             article.image &&
             String(article.image).trim() !== ""
                 ? `
-                    <img
-                        src="${escapeHTML(
-                            article.image
-                        )}"
-                        alt="${title}"
-                        class="news-card-image"
-                        loading="lazy"
-                        onerror="this.style.display='none'"
-                    >
+                    <div style="
+                        position:relative;
+                        width:100%;
+                        height:190px;
+                        overflow:hidden;
+                        background:#e5e7eb;
+                    ">
+
+                        <img
+                            src="${escapeHTML(
+                                article.image
+                            )}"
+                            alt="${title}"
+                            class="news-card-image"
+                            loading="lazy"
+                            onerror="this.style.display='none'"
+                        >
+
+                        <span style="
+                            position:absolute;
+                            right:9px;
+                            bottom:9px;
+                            z-index:10;
+                            padding:5px 7px;
+                            background:rgba(0,0,0,.58);
+                            color:rgba(255,255,255,.94);
+                            font-family:Arial,Helvetica,sans-serif;
+                            font-size:9px;
+                            font-weight:900;
+                            letter-spacing:.7px;
+                            line-height:1;
+                            border-radius:2px;
+                            pointer-events:none;
+                            user-select:none;
+                        ">
+                            DΛMZΞΞ NEWS
+                        </span>
+
+                    </div>
                 `
                 : `
                     <div class="news-card-no-image">

@@ -1137,3 +1137,37 @@ img {
         font-size: 30px;
     }
 }
+
+/* =========================================================
+   DΛMZΞΞ NEWS IMAGE WATERMARK
+   ========================================================= */
+
+.news-image-link,
+.top-story-image-link {
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+
+.news-image-link::after,
+.top-story-image-link::after {
+    content: "DΛMZΞΞ NEWS";
+    position: absolute;
+    right: 12px;
+    bottom: 10px;
+    z-index: 10;
+
+    padding: 5px 8px;
+    background: rgba(0, 0, 0, 0.55);
+    color: rgba(255, 255, 255, 0.92);
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    line-height: 1;
+
+    border-radius: 3px;
+    pointer-events: none;
+}
+

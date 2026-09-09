@@ -107,10 +107,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const subscribersPerPage = 20;
     let subscriberSearchTerm = "";
 
-    /*
-       When editing an article, this stores
-       the existing image URL.
-    */
     let existingArticleImage = "";
 
 
@@ -138,15 +134,6 @@ document.addEventListener("DOMContentLoaded", () => {
     /* =========================================
        STORAGE SETTINGS
     ========================================= */
-
-    /*
-       IMPORTANT:
-
-       Create a Supabase Storage bucket with
-       this exact name:
-
-       article-images
-    */
 
     const IMAGE_BUCKET =
         "article-images";
@@ -205,6 +192,113 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         return fallbackImage;
+    }
+
+
+    /* =========================================
+       ARTICLE PAGE URL
+    ========================================= */
+
+    function getArticleUrl(articleId) {
+
+        return new URL(
+            "../article.html?id=" +
+            encodeURIComponent(articleId),
+            window.location.href
+        ).href;
+    }
+
+
+    /* =========================================
+       COPY ARTICLE LINK
+    ========================================= */
+
+    async function copyArticleLink(
+        articleId,
+        button
+    ) {
+
+        const articleUrl =
+            getArticleUrl(articleId);
+
+
+        const originalText =
+            button.textContent;
+
+
+        try {
+
+            if (
+                navigator.clipboard &&
+                window.isSecureContext
+            ) {
+
+                await navigator.clipboard.writeText(
+                    articleUrl
+                );
+
+            }
+
+            else {
+
+                const temporaryInput =
+                    document.createElement("input");
+
+                temporaryInput.value =
+                    articleUrl;
+
+                temporaryInput.style.position =
+                    "fixed";
+
+                temporaryInput.style.left =
+                    "-9999px";
+
+                temporaryInput.style.top =
+                    "0";
+
+                document.body.appendChild(
+                    temporaryInput
+                );
+
+                temporaryInput.focus();
+
+                temporaryInput.select();
+
+                document.execCommand(
+                    "copy"
+                );
+
+                temporaryInput.remove();
+            }
+
+
+            button.textContent =
+                "Copied!";
+
+
+            setTimeout(() => {
+
+                button.textContent =
+                    originalText;
+
+            }, 1800);
+
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "DΛMZΞΞ NEWS: Unable to copy article link.",
+                error
+            );
+
+
+            alert(
+                "Unable to copy the article link.\n\n" +
+                articleUrl
+            );
+        }
     }
 
 
@@ -2369,11 +2463,43 @@ document.addEventListener("DOMContentLoaded", () => {
                 "click",
                 () => {
 
-                    window.location.href =
-                        "../article.html?id=" +
-                        encodeURIComponent(
+                    const articleUrl =
+                        getArticleUrl(
                             article.id
                         );
+
+                    window.open(
+                        articleUrl,
+                        "_blank",
+                        "noopener,noreferrer"
+                    );
+                }
+            );
+
+
+            /* COPY LINK */
+
+            const copyLinkButton =
+                document.createElement("button");
+
+            copyLinkButton.type =
+                "button";
+
+            copyLinkButton.className =
+                "secondary-button";
+
+            copyLinkButton.textContent =
+                "Copy Link";
+
+
+            copyLinkButton.addEventListener(
+                "click",
+                async () => {
+
+                    await copyArticleLink(
+                        article.id,
+                        copyLinkButton
+                    );
                 }
             );
 
@@ -2529,6 +2655,10 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
             actions.appendChild(
+                copyLinkButton
+            );
+
+            actions.appendChild(
                 editButton
             );
 
@@ -2649,22 +2779,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /*
-           Reset the file picker because browsers
-           don't allow us to programmatically select
-           an existing local file.
-        */
-
         if (articleImageFile) {
 
             articleImageFile.value =
                 "";
         }
 
-
-        /*
-           Show the existing image.
-        */
 
         if (
             article.image &&
@@ -2857,10 +2977,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
 
 
-                /*
-                   For a NEW article, require an image.
-                */
-
                 if (
                     editingArticleId === null &&
                     !selectedImage
@@ -2902,11 +3018,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         existingArticleImage ||
                         "";
 
-
-                    /*
-                       If a new image was selected,
-                       upload it first.
-                    */
 
                     if (selectedImage) {
 
