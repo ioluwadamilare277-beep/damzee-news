@@ -304,7 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =========================================
        IMAGE PREVIEW
-       ORIGINAL IMAGE — NO PERMANENT WATERMARK
+       NO PERMANENT WATERMARK
     ========================================= */
 
     function clearImageSelection() {
@@ -347,7 +347,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    function showImagePreview(file) {
+    async function showImagePreview(file) {
 
         if (!file) {
             return false;
@@ -443,7 +443,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                showImagePreview(
+                await showImagePreview(
                     file
                 );
             }
@@ -477,7 +477,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =========================================
        UPLOAD IMAGE TO SUPABASE STORAGE
-       ORIGINAL IMAGE — NO PERMANENT WATERMARK
+       ORIGINAL IMAGE — NO WATERMARK
     ========================================= */
 
     async function uploadArticleImage(file) {
@@ -509,10 +509,23 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
+        if (imageUploadStatus) {
+
+            imageUploadStatus.textContent =
+                "Uploading image...";
+        }
+
+
         const extensionMap = {
-            "image/jpeg": "jpg",
-            "image/png": "png",
-            "image/webp": "webp"
+
+            "image/jpeg":
+                "jpg",
+
+            "image/png":
+                "png",
+
+            "image/webp":
+                "webp"
         };
 
 
@@ -535,13 +548,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const filePath =
             "articles/" +
             uniqueName;
-
-
-        if (imageUploadStatus) {
-
-            imageUploadStatus.textContent =
-                "Uploading image...";
-        }
 
 
         const {
