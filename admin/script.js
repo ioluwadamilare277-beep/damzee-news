@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
 
     const articleForm =
@@ -304,407 +303,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       PERMANENT IMAGE WATERMARK
-       TOP-RIGHT POSITION
-    ========================================= */
-
-    async function createWatermarkedImage(file) {
-
-        return new Promise((resolve, reject) => {
-
-            if (!file) {
-
-                reject(
-                    new Error("No image selected.")
-                );
-
-                return;
-            }
-
-
-            const image =
-                new Image();
-
-            const objectUrl =
-                URL.createObjectURL(file);
-
-
-            image.onload = () => {
-
-                try {
-
-                    URL.revokeObjectURL(
-                        objectUrl
-                    );
-
-
-                    const canvas =
-                        document.createElement(
-                            "canvas"
-                        );
-
-
-                    const context =
-                        canvas.getContext(
-                            "2d"
-                        );
-
-
-                    if (!context) {
-
-                        reject(
-                            new Error(
-                                "Your browser could not prepare the image."
-                            )
-                        );
-
-                        return;
-                    }
-
-
-                    /*
-                     * Keep original dimensions.
-                     */
-
-                    canvas.width =
-                        image.naturalWidth;
-
-                    canvas.height =
-                        image.naturalHeight;
-
-
-                    /*
-                     * Draw original image.
-                     */
-
-                    context.drawImage(
-                        image,
-                        0,
-                        0,
-                        canvas.width,
-                        canvas.height
-                    );
-
-
-                    const width =
-                        canvas.width;
-
-                    const height =
-                        canvas.height;
-
-
-                    /* =================================
-                       WATERMARK SIZE
-                    ================================= */
-
-                    const watermarkSize =
-                        Math.max(
-                            16,
-                            Math.round(
-                                Math.min(
-                                    width,
-                                    height
-                                ) * 0.026
-                            )
-                        );
-
-
-                    const horizontalPadding =
-                        Math.max(
-                            12,
-                            Math.round(
-                                watermarkSize * 0.75
-                            )
-                        );
-
-
-                    const verticalPadding =
-                        Math.max(
-                            8,
-                            Math.round(
-                                watermarkSize * 0.45
-                            )
-                        );
-
-
-                    /*
-                     * TOP-RIGHT POSITION
-                     *
-                     * This replaces the old
-                     * bottom-right position.
-                     */
-
-                    const right =
-                        Math.max(
-                            18,
-                            Math.round(
-                                width * 0.022
-                            )
-                        );
-
-
-                    const top =
-                        Math.max(
-                            18,
-                            Math.round(
-                                height * 0.022
-                            )
-                        );
-
-
-                    /* =================================
-                       WATERMARK TEXT
-                    ================================= */
-
-                    const watermarkText =
-                        "DΛMZΞΞ NEWS";
-
-
-                    context.font =
-                        "900 " +
-                        watermarkSize +
-                        "px Arial, Helvetica, sans-serif";
-
-
-                    context.textBaseline =
-                        "middle";
-
-
-                    context.textAlign =
-                        "left";
-
-
-                    const textWidth =
-                        context.measureText(
-                            watermarkText
-                        ).width;
-
-
-                    const boxWidth =
-                        textWidth +
-                        horizontalPadding * 2;
-
-
-                    const boxHeight =
-                        watermarkSize +
-                        verticalPadding * 2;
-
-
-                    /*
-                     * TOP-RIGHT BOX
-                     */
-
-                    const boxX =
-                        width -
-                        right -
-                        boxWidth;
-
-
-                    const boxY =
-                        top;
-
-
-                    /*
-                     * Slightly rounded background.
-                     */
-
-                    const radius =
-                        Math.max(
-                            5,
-                            Math.round(
-                                watermarkSize * 0.25
-                            )
-                        );
-
-
-                    context.beginPath();
-
-                    context.moveTo(
-                        boxX + radius,
-                        boxY
-                    );
-
-                    context.lineTo(
-                        boxX +
-                        boxWidth -
-                        radius,
-                        boxY
-                    );
-
-                    context.quadraticCurveTo(
-                        boxX +
-                        boxWidth,
-                        boxY,
-                        boxX +
-                        boxWidth,
-                        boxY +
-                        radius
-                    );
-
-                    context.lineTo(
-                        boxX +
-                        boxWidth,
-                        boxY +
-                        boxHeight -
-                        radius
-                    );
-
-                    context.quadraticCurveTo(
-                        boxX +
-                        boxWidth,
-                        boxY +
-                        boxHeight,
-                        boxX +
-                        boxWidth -
-                        radius,
-                        boxY +
-                        boxHeight
-                    );
-
-                    context.lineTo(
-                        boxX + radius,
-                        boxY +
-                        boxHeight
-                    );
-
-                    context.quadraticCurveTo(
-                        boxX,
-                        boxY +
-                        boxHeight,
-                        boxX,
-                        boxY +
-                        boxHeight -
-                        radius
-                    );
-
-                    context.lineTo(
-                        boxX,
-                        boxY + radius
-                    );
-
-                    context.quadraticCurveTo(
-                        boxX,
-                        boxY,
-                        boxX + radius,
-                        boxY
-                    );
-
-                    context.closePath();
-
-
-                    /*
-                     * Dark semi-transparent background.
-                     */
-
-                    context.fillStyle =
-                        "rgba(0, 0, 0, 0.55)";
-
-                    context.fill();
-
-
-                    /*
-                     * White watermark text.
-                     */
-
-                    context.fillStyle =
-                        "rgba(255, 255, 255, 0.96)";
-
-
-                    context.fillText(
-                        watermarkText,
-                        boxX +
-                        horizontalPadding,
-                        boxY +
-                        boxHeight / 2
-                    );
-
-
-                    /*
-                     * Convert to JPEG.
-                     */
-
-                    canvas.toBlob(
-                        blob => {
-
-                            if (!blob) {
-
-                                reject(
-                                    new Error(
-                                        "Unable to create the watermarked image."
-                                    )
-                                );
-
-                                return;
-                            }
-
-
-                            const originalName =
-                                file.name.replace(
-                                    /\.[^/.]+$/,
-                                    ""
-                                );
-
-
-                            const watermarkedFile =
-                                new File(
-                                    [
-                                        blob
-                                    ],
-                                    originalName +
-                                    "-damzee.jpg",
-                                    {
-                                        type:
-                                            "image/jpeg",
-                                        lastModified:
-                                            Date.now()
-                                    }
-                                );
-
-
-                            resolve(
-                                watermarkedFile
-                            );
-
-                        },
-                        "image/jpeg",
-                        0.92
-                    );
-
-                }
-
-                catch (error) {
-
-                    URL.revokeObjectURL(
-                        objectUrl
-                    );
-
-                    reject(error);
-                }
-            };
-
-
-            image.onerror = () => {
-
-                URL.revokeObjectURL(
-                    objectUrl
-                );
-
-                reject(
-                    new Error(
-                        "Unable to read the selected image."
-                    )
-                );
-            };
-
-
-            image.src =
-                objectUrl;
-        });
-    }
-
-
-    /* =========================================
        IMAGE PREVIEW
+       ORIGINAL IMAGE ONLY
     ========================================= */
 
     function clearImageSelection() {
@@ -785,80 +385,43 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        try {
+        if (previewObjectUrl) {
 
-            if (imageUploadStatus) {
-
-                imageUploadStatus.textContent =
-                    "Adding DΛMZΞΞ NEWS watermark...";
-            }
-
-
-            const watermarkedFile =
-                await createWatermarkedImage(
-                    file
-                );
-
-
-            if (previewObjectUrl) {
-
-                URL.revokeObjectURL(
-                    previewObjectUrl
-                );
-            }
-
-
-            previewObjectUrl =
-                URL.createObjectURL(
-                    watermarkedFile
-                );
-
-
-            if (imagePreview) {
-
-                imagePreview.src =
-                    previewObjectUrl;
-            }
-
-
-            if (imagePreviewContainer) {
-
-                imagePreviewContainer.style.display =
-                    "block";
-            }
-
-
-            if (imageUploadStatus) {
-
-                imageUploadStatus.textContent =
-                    "Watermark added: " +
-                    file.name +
-                    " → ready to upload.";
-            }
-
-
-            return true;
-
+            URL.revokeObjectURL(
+                previewObjectUrl
+            );
         }
 
-        catch (error) {
 
-            console.error(
-                "DΛMZΞΞ NEWS: Watermark creation failed.",
-                error
+        previewObjectUrl =
+            URL.createObjectURL(
+                file
             );
 
 
-            alert(
-                "Unable to add the DΛMZΞΞ NEWS watermark.\n\n" +
-                error.message
-            );
+        if (imagePreview) {
 
-
-            clearImageSelection();
-
-            return false;
+            imagePreview.src =
+                previewObjectUrl;
         }
+
+
+        if (imagePreviewContainer) {
+
+            imagePreviewContainer.style.display =
+                "block";
+        }
+
+
+        if (imageUploadStatus) {
+
+            imageUploadStatus.textContent =
+                "Image ready to upload: " +
+                file.name;
+        }
+
+
+        return true;
     }
 
 
@@ -913,7 +476,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       UPLOAD IMAGE TO SUPABASE STORAGE
+       UPLOAD ORIGINAL IMAGE TO SUPABASE
+       NO PERMANENT WATERMARK
     ========================================= */
 
     async function uploadArticleImage(file) {
@@ -948,25 +512,26 @@ document.addEventListener("DOMContentLoaded", () => {
         if (imageUploadStatus) {
 
             imageUploadStatus.textContent =
-                "Adding DΛMZΞΞ NEWS watermark...";
+                "Uploading original image...";
         }
 
 
-        const watermarkedFile =
-            await createWatermarkedImage(
-                file
-            );
+        const extensionMap = {
+
+            "image/jpeg":
+                "jpg",
+
+            "image/png":
+                "png",
+
+            "image/webp":
+                "webp"
+        };
 
 
-        if (
-            watermarkedFile.size >
-            MAX_IMAGE_SIZE
-        ) {
-
-            throw new Error(
-                "The watermarked image is larger than 5 MB. Please choose a smaller image."
-            );
-        }
+        const extension =
+            extensionMap[file.type] ||
+            "jpg";
 
 
         const uniqueName =
@@ -976,19 +541,13 @@ document.addEventListener("DOMContentLoaded", () => {
             Math.random()
                 .toString(36)
                 .substring(2, 10) +
-            ".jpg";
+            "." +
+            extension;
 
 
         const filePath =
             "articles/" +
             uniqueName;
-
-
-        if (imageUploadStatus) {
-
-            imageUploadStatus.textContent =
-                "Uploading watermarked image...";
-        }
 
 
         const {
@@ -998,11 +557,11 @@ document.addEventListener("DOMContentLoaded", () => {
             .from(IMAGE_BUCKET)
             .upload(
                 filePath,
-                watermarkedFile,
+                file,
                 {
                     cacheControl: "3600",
                     upsert: false,
-                    contentType: "image/jpeg"
+                    contentType: file.type
                 }
             );
 
@@ -1046,7 +605,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (imageUploadStatus) {
 
             imageUploadStatus.textContent =
-                "Watermarked image uploaded successfully.";
+                "Original image uploaded successfully.";
         }
 
 
@@ -4492,4 +4051,3 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 });
-
