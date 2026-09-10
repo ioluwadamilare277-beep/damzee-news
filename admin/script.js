@@ -305,6 +305,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =========================================
        PERMANENT IMAGE WATERMARK
+       TOP-RIGHT POSITION
     ========================================= */
 
     async function createWatermarkedImage(file) {
@@ -312,6 +313,7 @@ document.addEventListener("DOMContentLoaded", () => {
         return new Promise((resolve, reject) => {
 
             if (!file) {
+
                 reject(
                     new Error("No image selected.")
                 );
@@ -361,7 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                     /*
-                     * Keep the original image dimensions.
+                     * Keep original dimensions.
                      */
 
                     canvas.width =
@@ -384,10 +386,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     );
 
 
-                    /*
-                     * Responsive watermark sizing.
-                     */
-
                     const width =
                         canvas.width;
 
@@ -395,23 +393,27 @@ document.addEventListener("DOMContentLoaded", () => {
                         canvas.height;
 
 
+                    /* =================================
+                       WATERMARK SIZE
+                    ================================= */
+
                     const watermarkSize =
                         Math.max(
-                            14,
+                            16,
                             Math.round(
                                 Math.min(
                                     width,
                                     height
-                                ) * 0.025
+                                ) * 0.026
                             )
                         );
 
 
                     const horizontalPadding =
                         Math.max(
-                            10,
+                            12,
                             Math.round(
-                                watermarkSize * 0.7
+                                watermarkSize * 0.75
                             )
                         );
 
@@ -420,32 +422,39 @@ document.addEventListener("DOMContentLoaded", () => {
                         Math.max(
                             8,
                             Math.round(
-                                watermarkSize * 0.5
-                            )
-                        );
-
-
-                    const right =
-                        Math.max(
-                            15,
-                            Math.round(
-                                width * 0.018
-                            )
-                        );
-
-
-                    const bottom =
-                        Math.max(
-                            15,
-                            Math.round(
-                                height * 0.018
+                                watermarkSize * 0.45
                             )
                         );
 
 
                     /*
-                     * Watermark text.
+                     * TOP-RIGHT POSITION
+                     *
+                     * This replaces the old
+                     * bottom-right position.
                      */
+
+                    const right =
+                        Math.max(
+                            18,
+                            Math.round(
+                                width * 0.022
+                            )
+                        );
+
+
+                    const top =
+                        Math.max(
+                            18,
+                            Math.round(
+                                height * 0.022
+                            )
+                        );
+
+
+                    /* =================================
+                       WATERMARK TEXT
+                    ================================= */
 
                     const watermarkText =
                         "DΛMZΞΞ NEWS";
@@ -459,6 +468,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     context.textBaseline =
                         "middle";
+
+
+                    context.textAlign =
+                        "left";
 
 
                     const textWidth =
@@ -477,6 +490,10 @@ document.addEventListener("DOMContentLoaded", () => {
                         verticalPadding * 2;
 
 
+                    /*
+                     * TOP-RIGHT BOX
+                     */
+
                     const boxX =
                         width -
                         right -
@@ -484,25 +501,105 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                     const boxY =
-                        height -
-                        bottom -
-                        boxHeight;
+                        top;
 
 
                     /*
-                     * Dark watermark background.
+                     * Slightly rounded background.
+                     */
+
+                    const radius =
+                        Math.max(
+                            5,
+                            Math.round(
+                                watermarkSize * 0.25
+                            )
+                        );
+
+
+                    context.beginPath();
+
+                    context.moveTo(
+                        boxX + radius,
+                        boxY
+                    );
+
+                    context.lineTo(
+                        boxX +
+                        boxWidth -
+                        radius,
+                        boxY
+                    );
+
+                    context.quadraticCurveTo(
+                        boxX +
+                        boxWidth,
+                        boxY,
+                        boxX +
+                        boxWidth,
+                        boxY +
+                        radius
+                    );
+
+                    context.lineTo(
+                        boxX +
+                        boxWidth,
+                        boxY +
+                        boxHeight -
+                        radius
+                    );
+
+                    context.quadraticCurveTo(
+                        boxX +
+                        boxWidth,
+                        boxY +
+                        boxHeight,
+                        boxX +
+                        boxWidth -
+                        radius,
+                        boxY +
+                        boxHeight
+                    );
+
+                    context.lineTo(
+                        boxX + radius,
+                        boxY +
+                        boxHeight
+                    );
+
+                    context.quadraticCurveTo(
+                        boxX,
+                        boxY +
+                        boxHeight,
+                        boxX,
+                        boxY +
+                        boxHeight -
+                        radius
+                    );
+
+                    context.lineTo(
+                        boxX,
+                        boxY + radius
+                    );
+
+                    context.quadraticCurveTo(
+                        boxX,
+                        boxY,
+                        boxX + radius,
+                        boxY
+                    );
+
+                    context.closePath();
+
+
+                    /*
+                     * Dark semi-transparent background.
                      */
 
                     context.fillStyle =
-                        "rgba(0, 0, 0, 0.58)";
+                        "rgba(0, 0, 0, 0.55)";
 
-
-                    context.fillRect(
-                        boxX,
-                        boxY,
-                        boxWidth,
-                        boxHeight
-                    );
+                    context.fill();
 
 
                     /*
@@ -513,26 +610,17 @@ document.addEventListener("DOMContentLoaded", () => {
                         "rgba(255, 255, 255, 0.96)";
 
 
-                    context.letterSpacing =
-                        "1px";
-
-
                     context.fillText(
                         watermarkText,
                         boxX +
-                            horizontalPadding,
+                        horizontalPadding,
                         boxY +
-                            boxHeight / 2
+                        boxHeight / 2
                     );
 
 
                     /*
-                     * Convert canvas to JPEG.
-                     *
-                     * JPEG makes the final uploaded
-                     * image consistent and ensures
-                     * the watermark is permanently
-                     * embedded in the file.
+                     * Convert to JPEG.
                      */
 
                     canvas.toBlob(
@@ -551,11 +639,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                             const originalName =
-                                file.name
-                                    .replace(
-                                        /\.[^/.]+$/,
-                                        ""
-                                    );
+                                file.name.replace(
+                                    /\.[^/.]+$/,
+                                    ""
+                                );
 
 
                             const watermarkedFile =
@@ -564,7 +651,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                         blob
                                     ],
                                     originalName +
-                                        "-damzee.jpg",
+                                    "-damzee.jpg",
                                     {
                                         type:
                                             "image/jpeg",
@@ -644,6 +731,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         if (imagePreviewContainer) {
+
             imagePreviewContainer.style.display =
                 "none";
         }
@@ -774,28 +862,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    function formatFileSize(bytes) {
-
-        if (bytes < 1024) {
-            return bytes + " B";
-        }
-
-        if (bytes < 1024 * 1024) {
-
-            return (
-                bytes / 1024
-            ).toFixed(1) +
-            " KB";
-        }
-
-        return (
-            bytes /
-            (1024 * 1024)
-        ).toFixed(1) +
-        " MB";
-    }
-
-
     /* =========================================
        IMAGE FILE SELECTED
     ========================================= */
@@ -886,20 +952,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        /*
-         * Permanently add the watermark.
-         */
-
         const watermarkedFile =
             await createWatermarkedImage(
                 file
             );
 
-
-        /*
-         * The watermark process converts the
-         * image to JPEG. Check final size too.
-         */
 
         if (
             watermarkedFile.size >
@@ -1149,10 +1206,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    /* =========================================
-       UPDATE ACTIVITY
-    ========================================= */
-
     function updateActivityList() {
 
         if (!activityList) {
@@ -1176,7 +1229,9 @@ document.addEventListener("DOMContentLoaded", () => {
             empty.textContent =
                 "No recent activity yet.";
 
-            activityList.appendChild(empty);
+            activityList.appendChild(
+                empty
+            );
 
             return;
         }
@@ -1494,7 +1549,8 @@ document.addEventListener("DOMContentLoaded", () => {
             icon.className =
                 "notification-empty-icon";
 
-            icon.textContent = "🔔";
+            icon.textContent =
+                "🔔";
 
 
             const text =
@@ -3406,10 +3462,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 try {
 
-                    /* =================================
-                       DETERMINE IMAGE
-                    ================================= */
-
                     let image =
                         existingArticleImage ||
                         "";
@@ -3424,9 +3476,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
 
 
-                    /* =================================
-                       UPDATE EXISTING ARTICLE
-                    ================================= */
+                    /* UPDATE */
 
                     if (
                         editingArticleId !== null
@@ -3574,9 +3624,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     }
 
 
-                    /* =================================
-                       CREATE NEW ARTICLE
-                    ================================= */
+                    /* CREATE */
 
                     else {
 
@@ -4213,8 +4261,6 @@ document.addEventListener("DOMContentLoaded", () => {
             );
 
 
-            /* PAGINATION */
-
             const totalPages =
                 Math.ceil(
                     totalSubscribers /
@@ -4446,3 +4492,4 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
 });
+
