@@ -304,7 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* =========================================
        IMAGE PREVIEW
-       NO PERMANENT WATERMARK
+       ORIGINAL IMAGE — NO PERMANENT WATERMARK
     ========================================= */
 
     function clearImageSelection() {
@@ -347,7 +347,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    async function showImagePreview(file) {
+    function showImagePreview(file) {
 
         if (!file) {
             return false;
@@ -385,66 +385,43 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
-        try {
+        if (previewObjectUrl) {
 
-            if (previewObjectUrl) {
-
-                URL.revokeObjectURL(
-                    previewObjectUrl
-                );
-            }
-
-
-            previewObjectUrl =
-                URL.createObjectURL(
-                    file
-                );
-
-
-            if (imagePreview) {
-
-                imagePreview.src =
-                    previewObjectUrl;
-            }
-
-
-            if (imagePreviewContainer) {
-
-                imagePreviewContainer.style.display =
-                    "block";
-            }
-
-
-            if (imageUploadStatus) {
-
-                imageUploadStatus.textContent =
-                    file.name +
-                    " → ready to upload.";
-            }
-
-
-            return true;
-
+            URL.revokeObjectURL(
+                previewObjectUrl
+            );
         }
 
-        catch (error) {
 
-            console.error(
-                "DΛMZΞΞ NEWS: Image preview failed.",
-                error
+        previewObjectUrl =
+            URL.createObjectURL(
+                file
             );
 
 
-            alert(
-                "Unable to preview the selected image.\n\n" +
-                error.message
-            );
+        if (imagePreview) {
 
-
-            clearImageSelection();
-
-            return false;
+            imagePreview.src =
+                previewObjectUrl;
         }
+
+
+        if (imagePreviewContainer) {
+
+            imagePreviewContainer.style.display =
+                "block";
+        }
+
+
+        if (imageUploadStatus) {
+
+            imageUploadStatus.textContent =
+                "Image ready to upload: " +
+                file.name;
+        }
+
+
+        return true;
     }
 
 
@@ -466,7 +443,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     return;
                 }
 
-                await showImagePreview(
+                showImagePreview(
                     file
                 );
             }
@@ -499,8 +476,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================================
-       UPLOAD ORIGINAL IMAGE TO SUPABASE
-       NO PERMANENT WATERMARK
+       UPLOAD IMAGE TO SUPABASE STORAGE
+       ORIGINAL IMAGE — NO PERMANENT WATERMARK
     ========================================= */
 
     async function uploadArticleImage(file) {
@@ -532,12 +509,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
 
+        const extensionMap = {
+            "image/jpeg": "jpg",
+            "image/png": "png",
+            "image/webp": "webp"
+        };
+
+
         const extension =
-            file.type === "image/png"
-                ? "png"
-                : file.type === "image/webp"
-                    ? "webp"
-                    : "jpg";
+            extensionMap[file.type] ||
+            "jpg";
 
 
         const uniqueName =
@@ -3027,7 +3008,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     submitButton.textContent =
                         selectedImage
-                            ? "Uploading image..."
+                            ? "Preparing image..."
                             : "Saving...";
                 }
 
